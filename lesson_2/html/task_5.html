@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 2(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 5</h1>
+	<p class="description">
+		Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.
+	</p>
+	<script>
+		//Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.
+		const now = new Date();
+		let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+		const diff = now - today;
+		const seconds = Math.round(diff / 1000);
+
+		const minutes = seconds / 60
+		const hours = seconds / 3600
+
+		document.write(`с начала дня прошло ${seconds} секунд, ${minutes.toFixed(1)} минут, ${hours.toFixed(1)} часов`);
+	</script>
+</body>
+</html>

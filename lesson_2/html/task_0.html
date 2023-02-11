@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 2(task 0)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 0</h1>
+	<p class="description">
+		Обчислити значення виразів
+	</p>
+	<script>
+		//Задача 0. Обчислити значення виразів
+		let a = parseFloat(prompt('Введите: a', 0))
+		let b = parseFloat(prompt('Введите: b', 0))
+		let c = parseFloat(prompt('Введите: c', 0))
+
+		let s1 = a + 12 + b
+		let s2 = Math.sqrt((a + b)/(2 * a))
+		let s3 = Math.cbrt((a + b) * c) 
+		let s4 = Math.sin(a/(-b))
+
+		document.write(`S1 = ${s1}; <br> S2 = ${s2}; <br> S3 = ${s3}; <br> S4 = ${s4};`)
+	</script>
+</body>
+</html>

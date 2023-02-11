@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 2(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Знайти суму, добуток та частку двох дійсних чисел. Результат вивести у формі таблиці
+	</p>
+	<script>
+		//Задача 1. Знайти суму, добуток та частку двох дійсних чисел. Результат вивести у формі таблиці
+		let a = parseFloat(prompt('Введите: а', 0))
+		let b = parseFloat(prompt('Введите: b', 0))
+
+		let s1 = a + b
+		let s2 = a / b
+		let s3 = a * b
+
+		document.write(`
+			<table>
+				<tr>
+					<td style="display: block">Сумма: ${s1}</td>
+					<td style="display: block">Частка: ${s2}</td>
+					<td style="display: block">Добуток: ${s3}</td>
+				</tr>
+			</table>
+		`)
+	</script>
+</body>
+</html>
