@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 3(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		З клавіатури вводиться ціна товару і кількість грошей. 
+		Якщо грошей не вистачає то відмовляємо у покупці, 
+		інакше, якщо ще залишаються гроші, то пропонуємо 
+		купити лотерею за 4 грн.
+	</p>
+	<script>
+		const itemPrice = parseFloat(prompt('Введите стоимость товара', 0))
+		const amountMoney = parseFloat(prompt('Введите к-тво денег на счету (грн)', 0))
+
+		if (amountMoney >= itemPrice) {
+			const diff = Math.floor(amountMoney - itemPrice)
+			if (diff >= 4) {
+				document.write(`
+					<p style="margin-bottom: 15px;">
+						оплата прошла успешно. Благодарим за покупку
+					</p>
+					<p style="margin-bottom: 15px;">
+						на вашем счету осталось: ${diff} грн.
+					</p>
+					<p style="margin-bottom: 15px;">испытайте удачу в лотарее за 4грн</p>
+					<button type="button" class="btn">купить</button>
+				`)
+			}else 
+			document.write(`
+				<p style="margin-bottom: 15px;">
+					оплата прошла успешно. Благодарим за покупку
+				</p>
+				<p style="margin-bottom: 15px;">
+					на вашем счету осталось: ${diff} грн.
+				</p>
+			`)
+		}else
+			document.write(`
+					<p>
+						не достаточно средств
+					</p>
+			`)
+	</script>
+</body>
+</html>

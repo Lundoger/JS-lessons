@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<title>Lesson 3(task 4)</title>
+	</head>
+	<body>
+		<a href="../index.html" class="back">Список задач</a>
+		<h1 class="title">Задача 4</h1>
+		<p class="description">
+			З клавіатури вводиться вік людини. Вивести на екран ким він є
+			(дитиною у садочку, школярем, студентом, працівником, пенсіонером).
+		</p>
+		<script>
+			const userAge = parseInt(prompt("Введите свой возраст", 98)),
+				kindergartenAge = 2,
+				schoolAge = 6,
+				studentAge = 18,
+				employeeAge = 22,
+				pensionerAge = 65;
+
+			if (userAge < kindergartenAge)
+				document.write(`
+				<p>
+					вы младенец
+				</p>
+			`);
+			else if (userAge >= kindergartenAge && userAge < schoolAge)
+				document.write(`
+					<p>
+						вы ребенок в детсаде
+					</p>
+				`);
+			else if (userAge >= schoolAge && userAge < studentAge)
+				document.write(`
+						<p>
+							вы учитесь в школе
+						</p>
+					`);
+			else if (userAge >= studentAge && userAge < employeeAge)
+				document.write(`
+							<p>
+								вы студент
+							</p>
+						`);
+			else if (userAge >= employeeAge && userAge < pensionerAge)
+				document.write(`
+								<p>
+									вы работник
+								</p>
+							`);
+			else if (userAge >= pensionerAge)
+				document.write(`
+								<p>
+									вы пенсионер
+								</p>
+							`);
+		</script>
+	</body>
+</html>

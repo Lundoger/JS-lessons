@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 3(task 3)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 3</h1>
+	<p class="description">
+		Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.
+	</p>
+	<script>
+		const minNum = 1
+		const maxNum = 5
+		let randomNumber = minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+
+		const firstAnswer = parseInt(prompt('Угадайте число от 1 до 5.Первая попытка:', 1))
+		const secondAnswer = parseInt(prompt('Угадайте число от 1 до 5.Вторая попытка:', 1))
+
+		if(randomNumber == firstAnswer) 
+			document.write(`
+				<p style="margin-bottom: 15px;">
+					рандомное число: ${randomNumber}
+				</p>
+				<p>
+					Вы угадали с первой попытки. Поздравляю!
+				</p>
+			`)
+			else if(randomNumber == secondAnswer)
+				document.write(`
+					<p style="margin-bottom: 15px;">
+						рандомное число: ${randomNumber}
+					</p>
+					<p>
+						Вы угадали с второй попытки. Поздравляю!
+					</p>
+				`)
+				else {
+					document.write(`
+						<p style="margin-bottom: 15px;">
+							рандомное число: ${randomNumber}
+						</p>
+						<p>
+							к сожалению вы не угадали(. Повезет в следующий раз
+						</p>
+					`)
+				}
+	</script>
+</body>
+</html>
