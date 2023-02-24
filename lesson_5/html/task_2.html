@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 5(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Створити 10 елементів для введення цін продуктів
+	</p>
+
+	<script>
+		for (let i = 1; i <= 10; i++) {
+			document.write(`
+				<h4 style="margin-bottom: 10px;">Product #${i}</h4>
+				<input style="height: 50px; padding: 0 15px; max-width: 500px; border: 1px solid #eee; margin-bottom: 30px;" type="text" name="form[text]" placeholder="Price">
+			`)
+		}
+	</script>
+</body>
+</html>

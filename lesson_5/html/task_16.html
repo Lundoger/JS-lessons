@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 5(task 16)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 16</h1>
+	<p class="description">
+		Kористувач поступово вводить прибуток магазину за кожен день протягом N 
+		тижнів. Знайти загальну величину прибутку та вивести величину 
+		прибутку протягом кожного окремого тижня
+	</p>
+	<script>
+		const DAYS_IN_WEEK = 7
+		const weeksQuantity = parseInt(prompt('Введите к-тво недель', 1))
+		const questionsQuantity = DAYS_IN_WEEK * weeksQuantity
+
+		let totalEarning = 0, weeksEarning = 0
+
+		for (let i = 1; i <= questionsQuantity;) {
+			const daysEarning = parseFloat(prompt(`Введите заработок магазина за ${i} день`))
+			if (isNaN(daysEarning))
+				alert(`Введите коректный заработок за ${i} день`)
+			else {
+				totalEarning += daysEarning
+				weeksEarning += daysEarning
+				if (i % DAYS_IN_WEEK === 0) {
+					document.write(`<div style="margin-bottom: 20px;">Заработок за ${i / DAYS_IN_WEEK} неделю:<span style="font-weight: 700;">${weeksEarning}</span></div>`)
+					weeksEarning = 0
+				}
+				i++
+			}
+		}
+		document.write(`<div style="margin-bottom: 20px;">Заработок за все время:<span style="font-weight: 700;">${totalEarning}</span></div>`)
+	</script>
+</body>
+</html>

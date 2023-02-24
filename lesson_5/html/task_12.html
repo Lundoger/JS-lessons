@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 5(task 12)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 12</h1>
+	<p class="description">
+		Iгровий автомат. Випадково вибираємо зображення у 3 позиціях.  
+		Вибір у кожній позиції вибирається як одне з чотирьох зображень. 
+		Вивести ці зображення і повідомити виграш користувача 
+		(три перших зображення 100 грн, три других – 200, три третіх – 500, 
+		три четвертих зображення – 1000грн). Використати цикли і switch
+	</p>
+	<script>
+		let appleCounter = 0, 
+			pineappleCounter = 0, 
+			lemonCounter = 0, 
+			cherryCounter = 0
+		
+		document.write('<div style="margin-bottom: 30px;" class="flex-container">')
+		for (let i = 0; i < 3; i++) {
+			let random = Math.floor(Math.random() * 4 + 1)
+			switch (random) {
+				case 1: 
+					appleCounter++
+					document.write('<img style="max-width: 100%;" src="../img/apple.png" alt="">')
+					break;
+				case 2: pineappleCounter++
+					document.write('<img style="max-width: 100%;" src="../img/pimeapple.png" alt="">')
+					break;
+				case 3: lemonCounter++
+					document.write('<img style="max-width: 100%;" src="../img/lemon.png" alt="">')
+					break;
+				case 4: cherryCounter++
+					document.write('<img style="max-width: 100%;" src="../img/cherry.png" alt="">')
+					break;
+			}
+		}
+		document.write('</div>')
+
+		if (appleCounter === 3) 
+			document.write('Вы выиграли 100грн, Поздравляю!')
+		else if (pineappleCounter === 3) 
+			document.write('Вы выиграли 200грн, Поздравляю!')
+		else if (lemonCounter === 3) 
+			document.write('Вы выиграли 500грн, Поздравляю!')
+		else if (cherryCounter === 3) 
+			document.write('Вы выиграли 1000грн, Поздравляю!')
+		else
+			document.write('Вы проиграли(((')
+	</script>
+</body>
+</html>
