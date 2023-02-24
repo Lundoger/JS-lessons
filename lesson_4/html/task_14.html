@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 5(task 14)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 14</h1>
+	<p class="description">
+		Каса. Користувачу повідомляють суму, яку йому треба сплатити. 
+		Користувач поступово вводить суму грошей до тих пір, 
+		поки суми не буде достатньо для оплати товарів.
+	</p>
+	<script>
+		const totalSum = 1000
+		alert(`Вам необходимо внести: ${totalSum}грн`)
+		let moneyCounter = 0
+		let checkCOunter = totalSum
+
+		for (let i = 0; moneyCounter < totalSum; i++) {
+			const enteredMoney = parseInt(prompt('Сколько хотите на цей раз внести?', 100))
+			checkCOunter -= enteredMoney
+			moneyCounter += enteredMoney
+			if (moneyCounter > totalSum) {
+				alert(`Вы внесли на ${Math.abs(checkCOunter)}грн больше, большое спасибо! (лишние деньги ушли на благое дело)`)
+				break;
+			}else if (moneyCounter === totalSum) {
+				alert(`Вы внесли нужную сумму, спасибо!`)
+				break;
+			}else 
+				alert(`Вам нужно внести еще ${checkCOunter}грн`)
+		}
+	</script>	
+</body>
+</html>
