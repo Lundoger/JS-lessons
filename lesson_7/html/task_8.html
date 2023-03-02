@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 7(task 8)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 8</h1>
+	<p class="description">
+		Створити функцію, яка виводить банер (у функцію передаються: 
+		зображення, заголовок та посилання, куди переходимо при 
+		кліку на зображення)тег img повине знаходитись у середині 
+		тега a
+	</p>
+	<script>
+		function getBanner(image, link, title) {
+			document.write(`
+				<a href="${link}" class="banner">
+					<h1 class="banner__title">${title}</h1>
+					<img class="banner__image" src="${image}" alt="">
+				</a>
+			`)
+		}
+
+		const title = 'Живи, а работай в свободное время!'
+		const link = 'https://edu.fls.guru/js.html'
+		const image = '../img/baner.png'
+
+		const banner = getBanner(image, link, title)
+	</script>
+</body>
+</html>

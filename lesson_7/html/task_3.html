@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 7(task 3)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 3</h1>
+	<p class="description">
+		Створити окремі функції, які для 4 чисел знаходять:
+			1)суму;
+			2)добуток;
+			3)середнє арифметичне;
+			4)мінімальне значення. 
+	</p>
+	<script>
+		function sum(num1, num2, num3, num4) {
+			return num1 + num2 + num3 + num4
+		}
+		function product(num1, num2, num3, num4) {
+			return num1 * num2 * num3 * num4
+		}
+		function avg(num1, num2, num3, num4) {
+			return (num1 + num2 + num3 + num4) / 4
+		}
+		function min(num1, num2, num3, num4) {
+			let minValue = Infinity
+
+			if (minValue > num1)
+				minValue = num1
+			else if(minValue > num2)
+				minValue = num2
+			else if(minValue > num3)
+				minValue = num3
+			else if(minValue > num4)
+				minValue = num4
+
+			return minValue
+		}
+
+		const firstNumber = parseFloat(prompt('Введите первое число', 1))
+		const secondNumber = parseFloat(prompt('Введите первое число', 2))
+		const thirdNumber = parseFloat(prompt('Введите первое число', 3))
+		const fourthNumber = parseFloat(prompt('Введите первое число', 4))
+
+		const numberSum = sum(firstNumber, secondNumber, thirdNumber, fourthNumber)
+		const numberProduct = product(firstNumber, secondNumber, thirdNumber, fourthNumber)
+		const numberAvg = avg(firstNumber, secondNumber, thirdNumber, fourthNumber)
+		const numberMin = min(firstNumber, secondNumber, thirdNumber, fourthNumber)
+
+		document.write(`
+			${numberSum} <br>
+			${numberProduct} <br>
+			${numberAvg} <br>
+			${numberMin}
+		`)
+	</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 7(task 5)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 5</h1>
+	<p class="description">
+		Створити окремі функції, які переводять:
+			Сантиметри у дюйми;
+			Кілограми у фунти;
+			Кілометри у милі.
+	</p>
+	<script>
+		function getCentimetersToInch(centimeters) {
+			const INCH_IN_CENTIMETERS = 2.54
+			const result = Math.round(centimeters / INCH_IN_CENTIMETERS)
+			return result
+		}
+		function getKilogramsToPounds(kilograms) {
+			const POUNDS_IN_KILOGRAMS = 2.2
+			const result = Math.round(kilograms / POUNDS_IN_KILOGRAMS)
+			return result
+		}
+		function getKilometersToMiles(kilometers) {
+			const MILES_IN_KILOMETERS = 0.6
+			const result = Math.round(kilometers / MILES_IN_KILOMETERS)
+			return result
+		}
+
+		const centimeters = parseInt(prompt('Введите к-тво сантиметров которое хотите перевести в дюймы'))
+		const kilograms = parseInt(prompt('Введите к-тво килограмм которое хотите перевести в фунты'))
+		const kilometers = parseInt(prompt('Введите к-тво километров которое хотите перевести в мили'))
+
+		const centimetersToInch = getCentimetersToInch(centimeters)
+		const kilogramsToPounds	= getKilogramsToPounds(kilograms)
+		const kilometersToMiles	= getKilometersToMiles(kilometers)
+
+		document.write(`
+			в ${centimeters} сантиметрах ${centimetersToInch} дюймов <br>
+			в ${kilograms} килограммах ${kilogramsToPounds} фунтов <br>
+			в ${kilometers} километрах ${kilometersToMiles} миль <br>
+		`)
+	</script>
+</body>
+</html>

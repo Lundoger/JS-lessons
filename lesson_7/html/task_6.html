@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 7(task 6)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 6</h1>
+	<p class="description">
+		Створити функцію, яка створює таблицю з вказаною кількістю рядків і стовпців (таблиця заповнюється заданим фіксованим повідомленням).
+	</p>
+	<script>
+		function createTable(tr, td) {
+			document.write(`<table>`)
+			for (let i = 1; i <= tr; i++) {
+				document.write(`<tr>`)
+				for (let j = 1; j <= td; j++) {
+					document.write(`<td>message</td>`)
+				}					
+				document.write(`</tr>`)
+			}
+			document.write(`</table>`)
+		}
+
+		const rows = parseInt(prompt('Введите к-тво рядов', 1))
+		const columns = parseInt(prompt('Введите к-тво колонок', 1))
+		const table = createTable(rows, columns)
+	</script>
+</body>
+</html>

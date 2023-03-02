@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 7(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька 
+		результатів: кількість парних, кількість додатних, кількість більших за 100.
+	</p>
+	<script>
+		function countNumbers(num1, num2, num3) {
+			let evenNum = 0;
+			let positiveNum = 0;
+			let moreThan100 = 0;
+
+			if (num1 % 2 === 0) evenNum++;
+			if (num2 % 2 === 0) evenNum++;
+			if (num3 % 2 === 0) evenNum++;
+
+			if (num1 > 0) positiveNum++;
+			if (num2 > 0) positiveNum++;
+			if (num3 > 0) positiveNum++;
+
+			if (num1 > 100) moreThan100++;
+			if (num2 > 100) moreThan100++;
+			if (num3 > 100) moreThan100++;
+
+			return `Кількість парних: ${evenNum} <br> кількість додатних: ${positiveNum} <br> кількість більших за 100: ${moreThan100}`
+		}
+
+		const firstUserNumber = parseInt(prompt('Введите первое число', 1))
+		const secondUserNumber = parseInt(prompt('Введите второе число', 2))
+		const thirdUserNumber = parseInt(prompt('Введите третье число', 3))
+
+		const result = countNumbers(firstUserNumber, secondUserNumber, thirdUserNumber)
+		document.write(result)
+	</script>
+</body>
+</html>

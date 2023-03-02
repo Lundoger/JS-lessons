@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 7(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Створити функцію, яка за номером місяця повертає його назву.
+	</p>
+	<script>
+		function getMonthName(month) {
+			switch (month) {
+				case 1: return 'январь'
+				case 2: return 'февраль'
+				case 3: return 'март'
+				case 4: return 'апрель'
+				case 5: return 'май'
+				case 6: return 'июнь'
+				case 7: return 'июль'
+				case 8: return 'август'
+				case 9: return 'сентябрь'
+				case 10: return 'октябрь'
+				case 11: return 'ноябрь'
+				case 12: return 'декабрь'
+				default: return 'Некоректный номер месяца'
+				//знаю что много ретернов - плохо, лучше создать переменную
+				//и в конце ее ретернить но мне лень переписывать, 
+				//прошу понять и простить(
+			}
+		}
+		const monthNumber = parseInt(prompt('Введите номер месяца', 1))
+		const monthName = getMonthName(monthNumber)
+
+		document.write(monthName)
+	</script>
+</body>
+</html>

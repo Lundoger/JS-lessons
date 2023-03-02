@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 7(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день робочим.
+	</p>
+	<script>
+		function getWorkDays(day) {
+			let result
+			if (day > 0 && day <= 5) 
+				result = 'Этот день робочий('
+			else if(day <= 7 && day > 0) 
+				result = 'Этот день выходной!'
+			else
+				result = 'некоректный номер дня'
+			
+			return result
+		}
+
+		const daysNumber = parseInt(prompt('Введите нмоер дня', 1))
+		const worksDay = getWorkDays(daysNumber)
+
+		document.write(worksDay)
+	</script>
+</body>
+</html>
