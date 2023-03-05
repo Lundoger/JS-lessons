@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 8(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:
+			номери днів, протягом яких кількість відвідувачів була меншою за 20;
+			номери днів, коли кількість відвідувачів була мінімальною;
+			номери днів, коли кількість відвідувачів була максимальною;
+			загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних.
+	</p>
+	<script>
+		let weeklyVisitors = [15, 33, 4, 98, 19, 111, 46] //заполнил массив сам что бы не выводилось миллион миллиардов промптов, прошу понять и простить 
+
+		function getVisitorsLessThan20(array) {
+			let arrayVisitorsLessThan20 = []
+			for (let i = 0; i < array.length; i++) {
+				if(array[i] < 20)
+					arrayVisitorsLessThan20.push(i + 1)
+			}
+			return arrayVisitorsLessThan20
+		}
+		function getMinQuantityVisitors(array) {
+			let minValue = Infinity
+			let minValueIndex = 0
+			for (let i = 0; i < array.length; i++) {
+				if(array[i] < minValue) {
+					minValue = array[i]
+					minValueIndex = i + 1
+				}
+			}
+
+			return minValueIndex
+		}
+
+		function getMaxQuantityVisitors(array) {
+			let maxValue = -Infinity
+			let maxValueIndex = 0
+			for (let i = 0; i < array.length; i++) {
+				if(array[i] > maxValue) {
+					maxValue = array[i]
+					maxValueIndex = i + 1
+				}
+			}
+
+			return maxValueIndex
+		}
+
+		function getSumVisitorsOfWeekdays(array) {
+			let sum = 0
+			for (let i = 0; i < array.length - 2; i++) {
+				sum += array[i]
+			}
+			
+			return sum
+		}
+
+		function getSumVisitorsOfWeekends(array) {
+			let sum = 0
+			for (let i = 5; i < array.length; i++) {
+				sum += array[i]
+			}
+			
+			return sum
+		}
+
+		const visitorsLessThan20 = getVisitorsLessThan20(weeklyVisitors)
+		const minQuantityVisitors = getMinQuantityVisitors(weeklyVisitors)
+		const maxQuantityVisitors = getMaxQuantityVisitors(weeklyVisitors)
+		const sumVisitorsOfWeekdays = getSumVisitorsOfWeekdays(weeklyVisitors)
+		const sumVisitorsOfWeekends = getSumVisitorsOfWeekends(weeklyVisitors)
+
+		document.write(`
+			<p style="margin-bottom: 20px;">Номера дней, когда посетителей было меньше 20: ${visitorsLessThan20}</p>
+			<p style="margin-bottom: 20px;">Номера дней, когда посетителей было меньше всего: ${minQuantityVisitors}</p>
+			<p style="margin-bottom: 20px;>Номера дней, когда посетителей было больше всего: ${maxQuantityVisitors}</p>
+			<p style="margin-bottom: 20px;>Сумма посетителей в рабочие дни: ${sumVisitorsOfWeekdays}</p>
+			<p>Сумма посетителей в выходные дни: ${sumVisitorsOfWeekends}</p>
+		`)
+	</script>
+</body>
+</html>

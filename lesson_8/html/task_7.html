@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 8(task 7)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 7</h1>
+	<p class="description">
+		Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
+			за весь рік;(1-12)
+			у першій половині року;(1-6)
+			у другій половині року;(7-12)
+			за літо;(6-8)
+			за ІІ квартал;
+			за парні місяці (з парними номерами);(2, 4, 6, 8, 10 ,12)
+			за місяці, які є початковими у сезоні (весна, літо, осінь, зима).(12, 3, 6, 9)
+	</p>
+	<script>
+		let paymentsThroughoutTheYear = [1000, 3400, 700, 960, 5000, 2100, 450, 1700, 540, 3600, 800, 3570]
+
+		function getIncomeSum(array, startMonthNum, endMonthNum) {
+			let sum = 0
+			for (let i = startMonthNum - 1; i < endMonthNum; i++) {
+				sum += array[i]
+			}
+			return sum
+		}
+
+		function calculateIncomeSumForMonths(array, step) {
+			let sum = 0
+			for (let i = step-1; i < array.length; i+= step) {
+				sum += array[i]
+			}
+			return sum
+		}
+
+		const totalSumIncome = getIncomeSum(paymentsThroughoutTheYear, 1, 12)
+		const firstHalfSumIncome = getIncomeSum(paymentsThroughoutTheYear, 1, 6)
+		const secondHalfSumIncome = getIncomeSum(paymentsThroughoutTheYear, 7, 12)
+		const summerIncomeSum = getIncomeSum(paymentsThroughoutTheYear, 6, 8)
+		const secondQuarterIncomeSum = getIncomeSum(paymentsThroughoutTheYear, 4, 6)
+		const evenMonthIncomeSum = calculateIncomeSumForMonths(paymentsThroughoutTheYear, 2)
+		const initialMonthsOfSeasonSum  = calculateIncomeSumForMonths(paymentsThroughoutTheYear, 3)
+
+		document.write(`
+		<ul>
+			<li style="margin-bottom: 20px;">Общее к-тво денег за весь год: ${totalSumIncome}</li>
+			<li style="margin-bottom: 20px;">Общее к-тво денег за первое полугодие: ${firstHalfSumIncome}</li>
+			<li style="margin-bottom: 20px;">Общее к-тво денег за второе полугодие: ${secondHalfSumIncome}</li>
+			<li style="margin-bottom: 20px;">Общее к-тво денег за лето: ${summerIncomeSum}</li>
+			<li style="margin-bottom: 20px;">Общее к-тво денег за 2 квартал: ${secondQuarterIncomeSum}</li>
+			<li style="margin-bottom: 20px;">Общее к-тво денег за парные месяцы: ${evenMonthIncomeSum}</li>
+			<li style="margin-bottom: 20px;">Общее к-тво денег за начальные месяцы в сезоне: ${initialMonthsOfSeasonSum}</li>
+		</ul>
+		`)
+	</script>
+</body>
+</html>

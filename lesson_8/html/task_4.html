@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 8(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які :
+		•	починаються на букву «А»;
+		•	перша і остання літери співпадають;
+		•	складаються з більше ніш 5 символів;
+	</p>
+	<script>
+		let carNumbers = ["А123BC", "BC456DE", "А789GH", "А321JK", "LMN789L"]
+
+		function getCountStartsWithA(array) {
+			let counter = 0
+			for (let i = 0; i < array.length; i++) {
+				if(array[i][0] === 'A')
+					counter++
+			}
+
+			return counter
+		}
+
+		function getCountFirstLastMatch(array) {
+			let counter = 0
+			for (let i = 0; i < array.length; i++) {
+				if(array[i][0] === array[i][array[i].length-1])
+					counter++
+			}
+
+			return counter
+		}
+
+		
+		function getCountLongerThan5(array) {
+			let counter = 0
+			for (let i = 0; i < array.length; i++) {
+				if(array[i].length > 5)
+					counter++
+			}
+
+			return counter
+		}
+
+		const countStartsWithA = getCountStartsWithA(carNumbers)
+		const countFirstLastMatch = getCountFirstLastMatch(carNumbers)
+		const countLongerThan5 = getCountLongerThan5(carNumbers)
+
+		document.write(`
+			<p style="margin-bottom: 20px;">к-тво номеров которые начинаються на А: ${countStartsWithA}</p>
+			<p style="margin-bottom: 20px;">к-тво номеров у которых первый и последний символ одинаковые: ${countFirstLastMatch}</p>
+			<p>к-тво номеров у которых символов больше 5: ${countLongerThan5}</p>
+		`)
+	</script>
+</body>
+</html>

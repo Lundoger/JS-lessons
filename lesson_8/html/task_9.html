@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 8(task 9)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 9</h1>
+	<p class="description">
+		Морський бій. Користувач вводить кількість клітинок одновимірного 
+		масиву та кількість одиночних кораблів. Комп’ютер довільно розміщує 
+		ці одиночні кораблі у масиві по один у клітинці якщо у клітинці 0, 
+		то клітинка пуста, якщо 1 – то це означає, що там є корабель. 
+		Користувач вводить номер клітинки, куди стріляє. Гра продовжується 
+		до тих пір, поки не будуть потоплені усі кораблі
+	</p>
+	<script>
+		function generateArrayWithBoard(cellsQuantity, shipsQuantity) {
+			let arrayWithShips = [];
+		  	for (let i = 0; i < cellsQuantity; i++) {
+		    	arrayWithShips.push(0);
+		  	}
+			for (let i = 0; i < shipsQuantity; i++) {
+		    	let shipPosition = Math.floor(Math.random() * cellsQuantity);
+		    	if (arrayWithShips[shipPosition] === 0) {
+					arrayWithShips[shipPosition] = 1;
+		    	} else {
+			    	i--;
+		    	}
+		  	}
+			return arrayWithShips;
+		}
+
+		function hasShips(array) {
+		  	for (let i = 0; i < array.length; i++) {
+		    	if (array[i] === 1) {
+		      		return true;
+		    	}
+		  	}
+			return false;
+		}
+
+		function game() {
+			const cellsQuantity = parseInt(prompt('Введите к-тво клеток:', 1));
+			const shipsQuantity = parseInt(prompt('Введите к-тво кораблей', 1));
+		  	const arrayWithBoard = generateArrayWithBoard(cellsQuantity, shipsQuantity);
+			console.log(arrayWithBoard);
+		  	let hits = 0;
+		  	while (hasShips(arrayWithBoard)) {
+		    	let guess = parseInt(prompt('Введите номер ячейки:', 1));
+		    	if (arrayWithBoard[guess - 1] === 1) {
+		    		alert('Попал!');
+					arrayWithBoard[guess - 1] = 0;
+		      		hits++;
+		    	} else {
+					alert('Промах!');
+				}
+			}
+			alert(`Вы победили! Количество выстрелов: ${hits}`);
+		}
+		game();
+	</script>
+</body>
+</html>

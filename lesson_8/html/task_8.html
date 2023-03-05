@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 8(task 8)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 8</h1>
+	<p class="description">
+		Дано одновимірний масив, у якому зберігається певна виграшна сума 
+		(елементи заповнюються випадковим чином значеннями від -500 до 500). 
+		Надаючи користувачу можливість вибирати номери елементів  (поки 
+		він не відмовиться). Знаходити сумарний виграш.
+	</p>
+	<script>
+		function getRandomNumber(min, max) {
+			let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+			return randomNum
+		}
+
+		function getArrayWithPrizes() {
+			let array = []
+			let randomNum
+			for (let i = 0; i < 10; i++) {
+				randomNum = getRandomNumber(-500, 500)
+				array.push(randomNum)
+			}
+			return array
+		}
+
+		function lottery(array, attemptsQuantity) {
+			let sum = 0
+			for (let i = 0; i < attemptsQuantity; i++) {
+				const number = parseInt(prompt('Введите номер от 1 до 10. Если желаете закончить игру и забрать ваш выигрыш, нажмите "Отмена"', 1))
+				if(number)
+					sum += array[number - 1]
+				else
+					break
+				
+				document.write	(`
+					<p style="margin-bottom: 20px;">
+						Вы выбрали номер ${number}, под которым лежало ${array[number - 1]}грн <br>
+						ваш выигрыш теперь составляет: ${sum}грн
+					</p>
+				`)
+			}
+			return sum
+		}
+
+		const arrayWithPrizes = getArrayWithPrizes()
+		const attemptsQuantity = parseInt(prompt('Введите к-тво ячеек с призом которые хотите открыть'))
+		const lotteryResult = lottery(arrayWithPrizes, attemptsQuantity)
+
+		document.write(`
+			вы выиграли: ${lotteryResult}грн! <br>
+			поздравляю!
+		`)
+	</script>
+</body>
+</html>

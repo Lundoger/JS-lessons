@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 8(task 5)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 5</h1>
+	<p class="description">
+		Дано послідовність оцінок учня. Підрахувати кількість:
+		1.	двійок
+		2.	кількість хороших оцінок (добре, відмінно); (8-12)
+		3.	кількість оцінок, які нижче середнього.
+	</p>
+	<script>
+		let studentScores = [1, 11, 2, 4, 5, 7, 10, 9, 11, 12, 7]
+
+		function getTwosQuantity(array) {
+			let counter = 0
+			for (let i = 0; i < array.length; i++) {
+				if(array[i] <= 2)
+					counter++
+			}
+
+			return counter
+		}
+
+		function getGoodGrades (array) {
+			let counter = 0
+			for (let i = 0; i < array.length; i++) {
+				if(array[i] >= 8)
+					counter++
+			}
+
+			return counter
+		}
+
+		function getAvgScores(array) {
+			let sum = 0
+			for (let i = 0; i < array.length; i++) {
+				sum += array[i]
+			}
+			let avgScores = sum / array.length
+			return avgScores
+		}
+
+		function getBelowAverageGrades(array) {
+			let counter = 0
+			for (let i = 0; i < array.length; i++) {
+				if (array[i] < avgScores)
+				counter++
+			}
+
+			return counter
+		}
+
+		const avgScores = getAvgScores(studentScores)
+		const twosQuantity = getTwosQuantity(studentScores)
+		const GoodGrades = getGoodGrades(studentScores)
+		const belowAverageGrades = getBelowAverageGrades(studentScores)
+
+		document.write(`
+			<p style="margin-bottom: 20px;">к-тво двоек: ${twosQuantity}</p>
+			<p style="margin-bottom: 20px;">к-тво хороших оценок: ${GoodGrades}</p>
+			<p>к-тво оценок ниже среднего: ${belowAverageGrades}</p>
+		`)
+	</script>
+</body>
+</html>

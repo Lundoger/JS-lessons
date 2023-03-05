@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 8(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Дано масив, який містить оцінки з К предметів. 
+		Знайти середній бал і з’ясувати до якої категорії 
+		він відноситься (відмінник, двійочник (має хоча би 
+		одну двійку), хорошист (оцінки добре і відмінно), 
+		трійочник(є хоча би одна трійка)).
+	</p>
+	<script>
+		//собственно сам массив 
+		function getScoreArray (scoreQuantity) {
+			let arr = []
+			for (let i = 0; i < scoreQuantity; i++) {
+				const grade = Math.floor(Math.random() * 5) + 1;//генерирую рандомное число потому что не хочу чтобы выводилось миллион миллиардов промптов, прошу понять и простить
+				console.log(grade)//для удобстава посмотреть шо вообще за оценки выводяться
+				arr.push(grade)
+			}
+
+			return arr
+		}
+
+		//авг оценок
+		function getAvgScore(scores) {
+			let scoreSum = 0
+			for (let i = 0; i < scores.length; i++) {
+				scoreSum += scores[i]
+			}
+			const result = scoreSum / scores.length
+			return result
+		}
+
+		//определяю к какой категории относиться ученик
+		function getStudentCategory(estimates) {
+			let category = ''
+			let deucesCounter = 0,
+				tripletsCounter = 0,
+				foursCounter = 0
+		
+			for (let i = 0; i < estimates.length; i++) {
+				if (estimates[i] <= 2)
+					deucesCounter++
+				else if (estimates[i] === 3)
+					tripletsCounter++
+				else if (estimates[i] === 4)
+					foursCounter++
+			}
+
+			if(deucesCounter > 0)
+				category = 'двійочник'
+			else if (tripletsCounter > 0)
+				category = 'трійочник'
+			else if (foursCounter > 0)
+				category = 'хорошист'
+			else 
+				category = 'відмінник'
+
+			return category
+		}
+
+		const amountSubject = parseInt(prompt('Введите к-тво предметов', 1))
+
+		const estimates = getScoreArray(amountSubject)
+		const avgScore = getAvgScore(estimates)
+		const studentCategory = getStudentCategory(estimates)
+
+		document.write(`
+			<p style="margin-bottom: 20px;">Средний балл: ${avgScore}</p>
+			<p>Категория: ${studentCategory}</p>
+		`)
+	</script>
+</body>
+</html>
