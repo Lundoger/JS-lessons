@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 9(task 5)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 5</h1>
+	<p class="description">
+		Дано масив елементів. Знайти добуток додатних елементів
+	</p>
+	<script>
+		const someArray = [-100, 55, -23, -4, 567, 90, 13, -543]
+		function ProductPositiveNumbers(array) {
+			let sumPositiveNumber = 0
+			for (const elem of array) {
+				if (elem > 0) sumPositiveNumber += elem
+			}
+			return sumPositiveNumber
+		}
+		const result = ProductPositiveNumbers(someArray)
+		document.write(result)
+	</script>
+</body>
+</html>
