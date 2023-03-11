@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 10(task 9)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1.9</h1>
+	<p class="description">
+		Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)<br>
+		Підрахувати суму цін, що більше за 1000
+	</p>
+	<script>
+		let pricesHistory = new Array(10).fill().map(() => Math.floor(Math.random() * 10000) + 1);
+		document.write(`${pricesHistory}<br>`)
+
+		let sumOfPriceMoreThan1000 = 0
+		for (const price of pricesHistory) {
+			if(price > 1000) sumOfPriceMoreThan1000 += price
+		}
+
+		document.write(`Сумма цен больших за 1000: ${sumOfPriceMoreThan1000}`)
+	</script>
+</body>
+</html>

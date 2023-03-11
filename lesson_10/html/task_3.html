@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 10(task 3)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1.3</h1>
+	<p class="description">
+		Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000) <br>
+		Сформувати список з тих цін, які більші за попереднє значення
+	</p>
+	<script>
+		let pricesHistory = new Array(10).fill().map(() => Math.floor(Math.random() * 10000) + 1);
+		document.write(`${pricesHistory}<br>`)
+
+		let pricesThanMorePrevValue = pricesHistory.reduce((acc, elem, i, arr) => {
+			if(elem > arr[i - 1]) return [...acc, elem]
+			return acc
+		}, [])
+		document.write(pricesThanMorePrevValue)
+	</script>
+</body>
+</html>
