@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 12(task 3)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 3</h1>
+	<p class="description">
+		Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.
+	</p>
+	<script>
+		function getRandomNumber(minV, maxV) {
+			return Math.floor(minV + Math.random() * (maxV + 1 - minV))
+		}
+		function getArray (elementQuantity, minV, maxV) {
+			let arr = []
+			for (let i = 0; i < elementQuantity; i++) {
+				arr.push(getRandomNumber(minV, maxV))
+			}
+			return arr
+		}
+		let arr = getArray(30, 1, 100)
+
+		let counter = 0, key, i
+
+		for (let k = 1; k < arr.length; k++) {
+			key = arr[k]
+			i = k-1
+			while (i >= 0 && arr[i] > key) {
+				arr[i + 1] = arr[i]
+				i-=1
+				counter++
+			}
+			arr[i + 1] = key
+		}
+		document.write(counter)
+		console.log(arr);
+	</script>
+</body>
+</html>

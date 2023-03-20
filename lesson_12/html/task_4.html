@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 12(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком
+	</p>
+	</table>
+	<tr></tr>
+	<td></td>
+	<script>
+		function getRandomNumber(minV, maxV) {
+			return Math.floor(minV + Math.random() * (maxV + 1 - minV))
+		}
+		function getArray (elementQuantity, minV, maxV) {
+			let arr = []
+			for (let i = 0; i < elementQuantity; i++) {
+				arr.push(getRandomNumber(minV, maxV))
+			}
+			return arr
+		}
+		let arr = getArray(10, 1, 100)
+//========================================================================================================================================================
+		let changed
+		document.write(`<table style="margin-bottom: 20px;">`)
+		do {
+			changed = false
+			document.write(`<tr><td>[${arr}]</td></tr>`)
+			for (let i = 1; i < arr.length; i++) {
+				if(arr[i-1] > arr[i]){
+					let tmp = arr[i-1]
+					arr[i-1] = arr[i]
+					arr[i] = tmp
+					changed = true
+				}
+			}
+		} while (changed);
+		document.write(`</table>`)
+//========================================================================================================================================================
+		let arr2 = getArray(10, 1, 100)
+		let leftIndex = 0
+		let rightIndex = arr2.length -1 
+		document.write(`<table style="margin-bottom: 20px;">`)
+		while (leftIndex < rightIndex) {
+			document.write(`<tr><td>[${arr2}]</td></tr>`)
+			for (let i = leftIndex; i < rightIndex; i++) {
+				if(arr2[i+1] < arr2[i]) {
+					let tmp = arr2[i+1]
+					arr2[i+1] = arr2[i]
+					arr2[i] = tmp
+				}
+			}
+			rightIndex--
+			for (let i = rightIndex; i > leftIndex; i--) {
+				if(arr2[i-1] > arr2[i]) {
+					let tmp = arr2[i-1]
+					arr2[i-1] = arr2[i]
+					arr2[i] = tmp
+				}
+
+			}
+			leftIndex++
+		}
+		document.write(`</table>`)
+//========================================================================================================================================================
+		let arr3 = getArray(10, 1, 100)
+		
+		let key, i
+
+		document.write(`<table>`)
+		for (let k = 1; k < arr3.length; k++) {
+			document.write(`<tr><td>[${arr3}]</td></tr>`)
+			key = arr3[k]
+			i = k - 1
+			while(i >= 0 && arr3[i] > key) {
+				arr3[i + 1] = arr3[i]
+				i = i - 1
+			}
+			arr3[i + 1] = key
+		}
+		document.write(`</table>`)
+	</script>
+</body>
+</html>
