@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 13(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Нехай <b>X_0 = 1, X_i = X_i-1 + 2_i</b>, де i - 1,2... . Визначити X_10. Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів
+	</p>
+	<script>
+		function calcXWithoutRecursion(i) {
+			if(i===0)return 1
+			else {
+				let x_i_1 = 1
+				let	x_i
+				for (let j = 1; j <= i; j++) {
+					x_i = x_i_1 + 2*j
+					x_i_1 = x_i 
+				}
+				return x_i
+			}
+		}
+
+		function calcXWithRecursion(i) {
+			i===0 ? 1 : calcX(i-1) + 2*i
+		}
+
+		console.log(calcXWithoutRecursion(10));
+		console.log(calcXWithRecursion(10));
+	</script>
+</body>
+</html>

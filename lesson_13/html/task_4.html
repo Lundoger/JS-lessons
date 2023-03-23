@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 13(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		З використанням замикань розробити ітератор, тобто функцію, що 
+		буде поступово за окремими викликами видавати по одну букву наперед 
+		заданого слова. З використанням нього розробити гру «Прекладач». 
+		Виводимо для користувача опис цього слова і по одну букву користувач 
+		вводить переклад цього слова. Підрахувати кількість вгаданих букв
+	</p>
+	<table></table>
+	<tr></tr>
+	<td></td>
+	<script>
+		function createIterator(word) {
+			let currentIndex = 0
+			function iterator()	{
+				if(currentIndex < word.length) {
+					return word[currentIndex++]
+				}
+			}
+			return iterator
+		}
+
+		const HIDDEN_WORD = 'javascript'
+		const iterator = createIterator(HIDDEN_WORD)
+		let rightAnswers = 0
+
+		for (let i = 1; i <= HIDDEN_WORD.length; i++) {
+			const userAnswer = prompt(`описание слова: язык программирования который мы сейчас учим; Введите ${i} букву этого слова на английском`).toLowerCase
+			if(userAnswer === iterator()) rightAnswers++
+		}
+
+		document.write(`
+			<table>
+				<tr>
+					<td>Загаданное слово</td>
+					<td>${HIDDEN_WORD}</td>
+				</tr>
+				<tr>
+					<td>Всего букв</td>
+					<td>${HIDDEN_WORD.length}</td>
+				</tr>
+				<tr>
+					<td>Правильно введеных букв</td>
+					<td>${rightAnswers}</td>
+				</tr>
+			</table>
+		`)
+	</script>
+</body>
+</html>

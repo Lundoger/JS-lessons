@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 13(task 3)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 3</h1>
+	<p class="description">
+		З використанням замикань розробити ітератор, тобто функцію, 
+		що буде поступово за окремими викликами видавати по одне 
+		значення від заданого мінімального до заданого максимального. 
+		Якщо значення досягне максимального, то наступним буде мінімальне 
+		значення. З використанням цієї функції реалізувати перебір номерів місяців. 
+	</p>
+	<script>
+		function createCounter(startValue, lastValue, step) {
+			let current = startValue - step
+			function counter() {
+				if(current < lastValue) return current+=step
+				else {
+					current = startValue
+					return current
+				}
+			}
+			return counter
+		}
+		let result = createCounter(1, 12, 1)
+		
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+		console.log(result());
+	</script>
+</body>
+</html>
