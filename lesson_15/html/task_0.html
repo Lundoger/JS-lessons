@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 15(task 0)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, 
+		а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+		Використати обидва методи стосовно обидвох об’єктів (використати call, apply)
+	</p>
+	<script>
+		let obj1 = {
+			array: [123,53,235,634,14,8],
+			getSum: function() {
+				return this.array.reduce((acc,el) => acc+el, 0)
+			}
+		}
+		let obj2 = {
+			array: [465,12,56,897,2,792,7],
+			getProduct: function (startValue, endValue) {
+				return this.array.reduce((acc,el) => {
+					if(el>= startValue && el<= endValue) {
+						return acc*el
+					}
+					return acc
+				},1)
+			}
+		}
+		let sum1 = obj1.getSum()
+		let sum2 = obj1.getSum.call(obj2)
+		let product1 = obj2.getProduct(0,60)
+		let product2 = obj2.getProduct.apply(obj1, [0,60])
+		document.write(`
+			<ul>
+				<li>${sum1}</li>
+				<li>${sum2}</li>
+				<li>${product1}</li>
+				<li>${product2}</li>
+			</ul>
+		`)
+	</script>
+</body>
+</html>

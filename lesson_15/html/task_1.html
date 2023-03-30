@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 15(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.<br>
+		Тир	Поля(властивості)<br>
+		- Масив, у якому зберігається поле з зайцями <br>
+		Методи (дії) <br>
+		- Метод пострілу (задається позиція пострілу) <br>
+		- Виведення ігрового поля
+	</p>
+	<script>
+		function getRandomNumber(min, max) {
+			return  min + Math.floor(Math.random() * (max - min + 1))
+		}
+		function getGameField(cellsNumber, rabbitCount) {
+			let arr = new Array(cellsNumber).fill(0)
+			let counter = 0
+			while(counter < rabbitCount) {
+				let randNum = getRandomNumber(0, cellsNumber-1)
+				if(arr[randNum] === 0) {
+					arr[randNum] = 1
+					counter++
+				}
+			}
+			return arr
+		}
+
+		let range = {
+			gameField: getGameField(10, 5),
+			getShot: function () {
+				let shotCoordinates = parseInt(prompt(`Введите координаты выстрела (от 1 до ${this.gameField.length})`, 0)) - 1
+				if(this.gameField[shotCoordinates] === 1) {
+					alert('Вы попали!')
+					this.gameField[shotCoordinates] = 0
+				}else 
+					alert('Промах!')
+			},
+			getCurrentField: function () {
+				document.write(`<table><tr>`)
+					for (let i = 0; i < this.gameField.length; i++) {
+						document.write(`<td>${this.gameField[i]}</td>`)
+					}
+				document.write(`</table></tr>`)	
+			},
+		}
+		range.getCurrentField()
+		range.getShot()
+		range.getShot()
+		range.getShot()
+		range.getCurrentField()
+		//вроде бы работает))
+	</script>
+</body>
+</html>

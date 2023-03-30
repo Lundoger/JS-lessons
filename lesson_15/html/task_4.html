@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 15(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		Розробити клас Baner<br>
+		Поля: <br>
+		- Масив об’єктів ( графічних зображень та посилань на сайти)<br>
+		методи:<br>
+		- Метод випадкового вибору об’єкта (графічного зображення та посилання)<br>
+		- Метод виведення випадкового банера
+	</p>
+	<script>
+		function getRandomNum(min,max) {
+			return  min + Math.floor(Math.random() * (max - min + 1))
+		}
+
+		class Banner {
+			constructor() {
+				this.bannersArray = [
+					{
+						imageSrc: '../img/banner_1.png',
+						href: 'https://edu.fls.guru/js.html'
+					},
+					{
+						imageSrc: '../img/banner_1.png',
+						href: 'https://edu.fls.guru/js.html'
+					},
+					{
+						imageSrc: '../img/banner_1.png',
+						href: 'https://edu.fls.guru/js.html'
+					},
+				]
+			}
+			randomBanner() {
+				let randomNum = getRandomNum(0, this.bannersArray.length-1)
+				let bannerImage = this.bannersArray[randomNum].imageSrc
+				let bannerHref = this.bannersArray[randomNum].href
+				return {bannerImage, bannerHref}
+			}
+			bannerOutput() {
+				let {bannerImage, bannerHref} = this.randomBanner()
+				document.write(`
+					<a href="${bannerHref}" class="banner">
+						<img class="banner__image" src="${bannerImage}" alt="">
+					</a>
+				`)
+			}
+		}
+
+		let obj = new Banner
+		obj.bannerOutput()
+	</script>
+</body>
+</html>

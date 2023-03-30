@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 15(task 3)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 3</h1>
+	<p class="description">
+		Розробити клас MultChecker для перевірки таблиці множення <br>
+		Поля <br>
+		- Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7) <br>
+		- Кількість правильних відповідей <br>
+		- Кількість неправильних відповідей <br>
+		Методи <br>
+		- Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване) <br>
+		- Перевірка правильності вказаної відповіді <br>
+		- render - виведення інформації про тестування на екран
+	</p>
+	<script>
+		function getRandomNum(min,max) {
+			return  min + Math.floor(Math.random() * (max - min + 1))
+		}
+
+		class MultiChecker  {
+			constructor(num) {
+				this.num = num
+				this.rightAnswers = 0
+				this.wrongAnswers = 0
+			}
+			exampleGeneration() {
+				let randomNum = Math.floor(Math.random() * 10) + 1;
+				let example =  `${this.num} * ${randomNum}`
+				let rightAnswer = this.num*randomNum
+				return {rightAnswer, example}	
+			}
+			validation() {
+				let {rightAnswer, example} = this.exampleGeneration()
+				let userAnswer = parseInt(prompt(example))
+				if (userAnswer === rightAnswer)this.rightAnswers++
+				else this.wrongAnswers++
+			}
+			render() {
+				document.write(`
+					Результат проверки таблицы умножения на ${this.num} <br>
+					Правильных ответов: ${this.rightAnswers} <br>
+					Неправильных ответов: ${this.wrongAnswers}
+				`)
+			}
+		}
+		
+		let obj = new MultiChecker(9)
+
+		// function MultiChecker(num) {
+		// 	this.num = num
+		// 	this.rightAnswers = 0
+		// 	this.wrongAnswers = 0
+		// }
+		// MultiChecker.prototype.exampleGeneration = function() {
+		// 	let randomNum = Math.floor(Math.random() * 10) + 1;
+		// 	let example =  `${this.num} * ${randomNum}`
+		// 	let rightAnswer = this.num*randomNum
+		// 	return {rightAnswer, example}	
+		// }
+		// MultiChecker.prototype.validation = function() {
+		// 	let {rightAnswer, example} = this.exampleGeneration()
+		// 	let userAnswer = parseInt(prompt(example))
+		// 	if (userAnswer === rightAnswer)this.rightAnswers++
+		// 	else this.wrongAnswers++
+		// }
+		// MultiChecker.prototype.render = function() {
+		// 	document.write(`
+		// 		Результат проверки таблицы умножения на ${this.num} <br>
+		// 		Правильных ответов: ${this.rightAnswers} <br>
+		// 		Неправильных ответов: ${this.wrongAnswers}
+		// 	`)
+		// }
+	</script>
+</body>
+</html>

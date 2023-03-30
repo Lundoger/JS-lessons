@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 15(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Створити об’єкт «Авто». <br>
+			Авто: Поля(властивості)<br>
+			- Марка<br>
+			- Розмір бака<br>
+			- Кількість наявних літрів<br>
+			- Кількість місць<br>
+			- Кількість пасажирів<br>
+			Методи (дії)<br>
+			- Заправка на вказану кількість літрів<br>
+			- Виведення кількості пасажирів<br>
+			- Додавання пасажирів<br>
+			- Висадка пасажирів //как я понял прям всех сразу
+	</p>
+	<script>
+		let car = {
+			model: 'Audi',
+			tankCapacity: 75,
+			availableLiters: 23,
+			seatsNumber: 2,
+			passengersNumber: 1,
+			refueling: function(litersCount) {
+				let emptyTankSpace = this.tankCapacity - this.availableLiters
+				if(litersCount > emptyTankSpace) alert(`Сейчас в бак можно залить не больше ${emptyTankSpace} литров`)
+				else this.availableLiters += litersCount  
+			},
+			withdrawalOfPassengers: function(passengersCount) {
+				if(passengersCount > this.passengersNumber)alert('В машине нет столько пассажиров')
+				else this.passengersNumber -= passengersCount
+			},
+			addingPassengers: function (passengersCount) {
+				let emptySeats = this.seatsNumber - this.passengersNumber
+				if(passengersCount > emptySeats) alert('В машине сейчас нет столько свободных мест')
+				else this.passengersNumber += passengersCount
+			},
+			disembarkationOfPassengers: function() {
+				this.passengersNumber = 0
+			},
+		}
+	</script>
+</body>
+</html>

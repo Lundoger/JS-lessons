@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 15(task 5)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 5</h1>
+	<p class="description">
+		Розробити клас «Керівник танців»<br>
+		Поля:<br>
+		- Масив імен хлопців<br>
+		- Масив імен дівчат<br>
+		Методи:<br>
+		- Метод випадкового вибору імені хлопця<br>
+		- Метод випадкового вибору імені дівчини<br>
+		- Метод виведення пари для танців<br>
+		- Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців
+	</p>
+	<script>
+		function getRandomNum(min,max) {
+			return  min + Math.floor(Math.random() * (max - min + 1))
+		}
+
+		class DanceLeader {
+			constructor() {
+				this.maleNames = ["Alex", "Benjamin", "Charlie", "David", "Edward", "Frank"];
+				this.femaleNames = ["Alice", "Bella", "Charlotte", "Daisy", "Emma", "Fiona"];
+			}
+			randomMaleName() {
+				let randomIndex = getRandomNum(0, this.maleNames.length-1)
+				return this.maleNames[randomIndex]
+			}
+			randomFemaleName() {
+				let randomIndex = getRandomNum(0, this.femaleNames.length-1)
+				return this.femaleNames[randomIndex]
+			}
+			outputCoupleForDancing() {
+				let man = this.randomMaleName()
+				let woman = this.randomFemaleName()
+				document.write(`пара для танцев: ${man} - ${woman}`)
+			}
+			run() {
+				setInterval(this.outputCoupleForDancing(), 5000)
+			}
+		}
+
+		let obj = new DanceLeader
+		obj.run()
+	</script>
+</body>
+</html>
