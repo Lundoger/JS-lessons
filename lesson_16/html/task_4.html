@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 16(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		Створити клас TBankomat, який моделює роботу банкомата. 
+		Клас повинен містити поля для зберігання кількості купюр кожного 
+		із номіналів від 5 до 200 гривень. Реалізувати методи знаходження 
+		максимальної та мінімальної сум, які може видати банкомат, 
+		та метод зняття деякої суми.
+	</p>
+	<script>
+		class TBankomat {
+			constructor() {
+				this.banknotes = {
+      				5: 100,
+      				10: 100,
+      				20: 100,
+      				50: 100,
+      				100: 100,
+      				200: 100,
+    			};
+			}
+			getMaxAmount() {
+				let sum = 0;
+    			for (const [value, count] of Object.entries(this.banknotes)) {
+    			  sum += value * count;
+    			}
+    			return sum;
+			}
+			getMinAmount() {
+    			for (const [value, count] of Object.entries(this.banknotes)) {
+					if(count > 0) {
+						return value
+					}
+    			}
+				return 'В банкомате нет денег'
+			}
+			withdraw(amount) {
+				const banknotes = Object.keys(this.banknotes).map(Number).sort((a,b) => b-a)
+				let result = {}
+				for (let i = 0; i < banknotes.length; i++) {
+					let value = banknotes[i]
+					let wholePart = Math.floor(amount/value)
+					wholePart = Math.min(wholePart, this.banknotes[value]);
+					if(wholePart > 0) {
+						this.banknotes.value -= wholePart
+						amount -= value*wholePart
+						result[value] = wholePart
+					}
+				}
+				if (amount > 0) return null
+				else return result
+			}
+		}
+		let bankomat = new TBankomat
+		console.log(bankomat.withdraw(1320));
+	</script>
+</body>
+</html>

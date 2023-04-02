@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 16(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Створити клас TDate для роботи із датами у форматі 
+		“день.місяць.рік”. Дата представляється структурою із 
+		трьома полями. Реалізувати методи збільшення/зменшення 
+		дати на певну кількість днів, місяців чи років. Введення 
+		та виведення дати реалізувати за допомогою методу  toString.
+	</p>
+	<script>
+		class TDate {
+			constructor(year, month, day) {
+				this.year = year
+				this.month = month
+				this.day = day
+			}
+			increaseYear(value) {
+				return this.year+=value
+			}
+			decreaseYear(value) {
+				return this.year-=value
+			}
+			increaseMonth(value) {
+				let tmp = this.month + value
+				if(tmp > 12) {
+					let wholePart = Math.floor(tmp/12)
+					this.increaseYear(wholePart)
+					this.month = tmp%12
+				}else this.month = tmp
+			}
+			decreaseMonth(value) {
+				let tmp = this.month - value
+				if(tmp < 1) {
+					let wholePart = Math.floor(Math.abs(tmp)/12)
+					this.decreaseYear(wholePart)
+					this.month = Math.abs(tmp)%12
+				}else this.month = tmp
+			}
+			increaseDay(value) {
+				let tmp = this.day + value
+				if(tmp > 30) {
+					let wholePart = Math.floor(tmp/30)
+					this.increaseMonth(wholePart)
+					this.day = tmp%30
+				}else this.day = tmp
+			}
+			decreaseDay(value) {
+				let tmp = this.day - value
+				if(tmp < 1) {
+					let wholePart = Math.floor(Math.abs(tmp)/30)
+					this.decreaseMonth(wholePart)
+					this.day = Math.abs(tmp)%30
+				}else this.day = tmp
+			}
+			toString() {
+				return `${this.day}.${this.month}.${this.year}`
+			}
+		}
+		//я от слова совсем не понял формулу цикличных данных поэтому 
+		//как мне кажется я решение немного усложнил и можно было сделать проще
+		//если подскажите как решать подобные задачки проще, буду благодарен
+		let obj = new TDate(2023,7,29)
+		document.write(obj)
+	</script>
+</body>
+</html>

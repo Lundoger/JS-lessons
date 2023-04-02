@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 16(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Створити клас TMoney для роботи з грошовими сумами. 
+		Сума повинна зберігатися у вигляді доларового еквіваленту. 
+		Реалізувати методи додавання/вилучення грошової маси, 
+		вказуючи необхідну суму у гривнях, та визначення курсу 
+		долара, при якому сума у гривнях збільшиться на 100. Курс 
+		долара зберігати в окремому полі.
+	</p>
+	<script>
+		class TMoney {
+			#dollarExchangeRate
+			constructor(usdCapital, dollarExchangeRate = 36.67) {
+				this.usdCapital = usdCapital
+				this.DollarExchangeRate = dollarExchangeRate
+			}
+			addMoney(valueInUah) {
+				this.usdCapital += valueInUah/this.dollarExchangeRate
+			}
+			removeMoney(valueInUah) {
+				let valueInDollar = valueInUah/this.dollarExchangeRate
+				if(valueInDollar>this.usdCapital) throw new Error('not enough money')
+				else this.usdCapital -= valueInDollar
+			}
+			get DollarExchangeRate() {
+				return this.#dollarExchangeRate
+			}
+			set DollarExchangeRate(rate) {
+				if(rate < 0) throw new Error('invalid value')
+				this.#dollarExchangeRate = rate
+			}
+			toString() {
+				return `На счету сейчас: ${usdCapital}<br>Курс доллара: ${dollarExchangeRate}`
+			}
+		}
+		//строчку "та визначення курсу долара, при якому сума у гривнях збільшиться на 100"
+		//вообще не понял, если решение не верное, я переделаю
+
+		let obj = new TMoney(1000)
+	</script>
+</body>
+</html>
