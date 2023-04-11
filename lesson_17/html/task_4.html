@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 17(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		Склад. База товарів, які зберігаються на складі: 
+		назва товару, одиниця виміру, кількість, фірма виробник (назва, реєстраційний номер). 
+		Організувати реєстрацію/відвантаження товарів, фільтрація за назвою товару, фільтрація за назвою фірми
+	</p>
+	<script>
+		class Firm {
+			constructor(name, registrationNumber) {
+				this.name = name
+				this.registrationNumber = registrationNumber
+			}
+			toString() {
+				return `${this.name}: ${this.registrationNumber}`
+			}
+		}
+
+		let firm1 = new Firm('Firm A', 534535123)
+		let firm2 = new Firm('Firm B', 534535123)
+		let firm3 = new Firm('Firm C', 534535123)
+
+		class Product {
+			constructor(name, unit, quantity, firm) {
+				this.name = name
+				this.unit = unit
+				this.quantity = quantity
+				this.firm = {...firm}
+			}
+			toString() {
+				return `${this.name} ${this.unit}, ${this.quantity}<br>${this.firm}<br>`
+			}
+		}
+
+		let product1 = new Product('Яблоки', 'кг', 200, firm3)
+		let product2 = new Product('Рис', 'кг', 800, firm1)
+		let product3 = new Product('Курица', 'кг', 150, firm2)
+
+		class Stock {
+			constructor() {
+				this.productList = []
+			}
+			registerProduct(product) {
+				this.productList.push(product)
+			}
+			productShipment(name, amount) {
+				let requiredProduct = this.productList.find(el => el.name === name)
+				if(requiredProduct.quantity >= amount) requiredProduct.quantity -= amount
+				else throw new Error('На складе нет столько товара')
+			}
+			sortByProductName() {
+				this.productList.sort((el1, el2) => {
+					return el1.name.localeCompare(el2.name)
+				})
+			}
+			sortByFirmName() {
+				this.productList.sort((el1, el2) => {
+					return el1.firm.name.localeCompare(el2.firm.name)
+				})
+			}
+		}
+		let stock = new Stock
+		stock.registerProduct(product1)
+		stock.registerProduct(product2)
+		stock.registerProduct(product3)
+		stock.sortByFirmName()
+		console.log(stock);
+	</script>
+</body>
+</html>

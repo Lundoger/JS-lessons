@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 17(task 5)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 5</h1>
+	<p class="description">
+		Особиста бібліотека. Картотека домашньої бібліотеки: 
+		дані книги (автори (піб, рік народження, короткий опис), 
+		назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). 
+		Реалізувати розділи бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.), 
+		походження книги і наявність на даний час. Організувати додавання/вилучення книг та  вибір 
+		книг за назвою, за ПІБ автора, за видавництвом.
+	</p>
+	<script>
+		class Author {
+			constructor(fullName, birthYear, description) {
+				this.fullName = fullName 
+				this.birthYear = birthYear 
+				this.description = description
+			}
+			toString() {
+				return `Автор: ${this.fullName}<br>Год рождения: ${this.birthYear}<br>Описание: ${this.description}<br>`
+			}
+		}
+
+		class PublishingHouse {
+			constructor(name, registerNumber, foundationYear) {
+				this.name = name
+				this.registerNumber = registerNumber
+				this.foundationYear = foundationYear
+			}
+			toString() {
+				return `Компания: ${this.name}<br>Регистрационный номер: ${this.registerNumber}<br>Год основания: ${this.foundationYear}<br>`
+			}
+		}
+
+		class Book {
+			constructor(author, title, genre, section, publishingHouse, origin) {
+				this.author = {...author}
+				this.title = title
+				this.genre = genre
+				this.section = section
+				this.publishingHouse = {...publishingHouse}
+				this.origin = origin
+			}
+			toString() {
+				return `Книга: ${this.title}<br>Жанр: ${this.genre}<br>Автор: ${this.authorsArray}<br>Издательство: ${this.publishingHouse}<br>`
+			}
+		}
+
+		class Library {
+			static libraryRef
+			constructor() {
+				if(Library.libraryRef) return Library.libraryRef
+				this.homeLibrary = []
+				Library.libraryRef = this
+			}
+			librarySection(section) {
+				let suitableBooks = []
+				for (const books of this.homeLibrary) {
+					if(books.section === section) suitableBooks.push(books)
+				}
+				return suitableBooks
+			}
+			booksAvailable(bookTitle) {
+				let suitableBook =  this.homeLibrary.find(el => el.title === bookTitle)
+				if(suitableBook) return suitableBook
+				throw new Error('Книги нет в наличии')//не знаю что тут лучше ретурнить это сообщение или передавать в ошибку
+			}
+			originOfTheBook(bookTitle) {
+				let suitableBook =  this.homeLibrary.find(el => el.title === bookTitle)
+				if(suitableBook) return suitableBook.origin
+				throw new Error('Книги нет в библиотеке')
+			}
+			addingBook(book) {
+				this.homeLibrary.push(book)
+			}
+			removeBook(bookTitle) {
+				let indexSuitableBook =  this.homeLibrary.findIndex(el => el.title === bookTitle)
+				if(indexSuitableBook !== -1) this.homeLibrary.splice(indexSuitableBook, 1)
+				else throw new Error('Книги уже нет в библиотеке')
+			}
+			bookSelectionWithTitle(bookTitle) {
+				let suitableBook =  this.homeLibrary.find(el => el.title === bookTitle)
+				if(suitableBook) return suitableBook
+				throw new Error('Книги нет в наличии')
+			}
+			bookSelectionWithAuthorFullName(authorFullName) {
+				let suitableBook =  this.homeLibrary.find(el => el.author.fullName === authorFullName)
+				if(suitableBook) return suitableBook
+				throw new Error('Книги нет в наличии')
+			}
+			bookSelectionWithPublishingHouse(publishingHouseName) {
+				let suitableBook =  this.homeLibrary.find((el) => {
+					return el.publishingHouse.name === publishingHouseName
+				})
+				if(suitableBook) return suitableBook
+				throw new Error('Книги нет в наличии')
+			}
+		}
+
+		let author1 = new Author('John Smith', 1980, 'Best-selling author');
+		let author2 = new Author('Jane Doe', 1975, 'Famous writer');
+		let publisher1 = new PublishingHouse('Penguin Books', '12345', 1935);
+		let publisher2 = new PublishingHouse('HarperCollins', '67890', 1817);
+		let book1 = new Book(author1, 'The Great Gatsby', 'Fiction', 'Classics', publisher1, 'bought');
+		let book2 = new Book(author2, 'Pride and Prejudice', 'Romance', 'Classics', publisher2, 'gift');
+		let library = new Library();
+		library.addingBook(book1)
+		library.addingBook(book2)
+		console.log(library)
+	</script>
+</body>
+</html>

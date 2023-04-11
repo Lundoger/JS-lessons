@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 17(task 6)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 6</h1>
+	<p class="description">
+		Дано два класи MultChecker (клас для перевірки таблиці множення - 
+		рандомно генеруються числа, які треба перемножати), AddChecker 
+		(клас для перевірки додавання - рандомно генеруються числа у заданому 
+		діапазоні, які треба додавати). Обидва класи надсилають результати 
+		тестування об'єкту класу Hystory, який зберігає історію тестування у масиві у вигляді об'єктів  
+		Приклад.
+		testsList= [
+		   {firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},
+		   {firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},
+		]
+		Можна створити окремий клас TestData, який описує один такий тест і у якому будуть ці поля. 
+		Розробити клас TestManager, який використовуючи ці класи за допомогою таймера періодично 
+		генерує якісь N задач (рандомно вибираємо, що опитувати: додавання чи множення) і 
+		проводить опитування. Результати тестування додаються в об’єкт History.  Зробити так, 
+		щоб об'єкт такого класу можна було створити тільки один. Коли зроблено ці N задач вивести усю історію на екран.
+	</p>
+	<script>
+		class MultChecker {
+			constructor(minV, maxV) {
+				this.firstNumber
+				this.secondNumber
+				this.userAnswer
+				this.correctAnswer
+				this.minV = minV
+				this.maxV = maxV
+				this.operation = '*'
+			}
+			getRandomNum() {
+				return Math.floor(Math.random() * (this.maxV - this.minV + 1)) + this.minV
+			}
+			test() {
+				this.firstNumber = getRandomNum(1, 10)
+				this.secondNumber = getRandomNum(1, 10)
+				this.userAnswer = parseInt(prompt(`${this.firstNumber} * ${this.secondNumber} = ?`))
+				this.correctAnswer = this.firstNumber * this.secondNumber
+			}
+		}
+		class AddChecker {
+			constructor(minV, maxV) {
+				this.firstNumber
+				this.secondNumber
+				this.userAnswer
+				this.correctAnswer
+				this.minV = minV
+				this.maxV = maxV
+				this.operation = '+'
+			}
+			getRandomNum() {
+				return Math.floor(Math.random() * (this.maxV - this.minV + 1)) + this.minV
+			}
+			test() {
+				this.firstNumber = getRandomNum(1, 10)
+				this.secondNumber = getRandomNum(1, 10)
+				this.userAnswer = parseInt(prompt(`${this.firstNumber} + ${this.secondNumber} = ?`))
+				this.correctAnswer = this.firstNumber + this.secondNumber
+			}
+		}
+		class TestData {
+			constructor({ firstNum, secondNum, operation, userAnswer, correctAnswer }) {
+				this.firstNum = firstNum
+				this.secondNum = secondNum
+				this.operation = operation
+				this.userAnswer = userAnswer
+				this.correctAnswer = correctAnswer
+			}
+			toString() {
+				return `firstNum:${this.firstNum},secondNum:${this.secondNum}, operation:\'${this.operation}\',userAnswer:${this.userAnswer},correctAnswer:${this.correctAnswer}<br>`
+			}
+		}
+
+		class History {
+			constructor() {
+				this.history = []
+			}
+			addTest(test) {
+				this.history.push(test)
+			}
+			toString() {
+				return `${this.history}`
+			}
+		}
+
+		class TestManager {
+		    static testManagerObj
+		    constructor(tasksNum, minNum, maxNum) {
+		     	if (TestManager.testManagerObj) return TestManager.testManagerObj
+		     	this.history = new History()
+		     	this.tasksNum = tasksNum
+		     	this.minNum = minNum
+		     	this.maxNum = maxNum
+		     	TestManager.testManagerObj = this
+		    }
+			startTest() {
+				let count = this.tasksNum
+				let timer = setInterval(() => {
+					if (count === 0) {
+						clearInterval(timer)
+						this.printHistory()
+					} else {
+						let tmp = Math.round(Math.random())
+						if (tmp === 0) tmp = new MultChecker(this.minNum, this.maxNum)
+						else tmp = new AddChecker(this.minNum, this.maxNum)
+						tmp.test()
+						let testData = new TestData(tmp)
+						this.history.addTest(testData)
+						count--
+					}
+				}, 3000)
+			}
+			printHistory() {
+				document.write(`${this.history}`)
+			}
+		}
+	</script>
+</body>
+</html>

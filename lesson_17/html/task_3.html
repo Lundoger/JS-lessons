@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 17(task 3)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 3</h1>
+	<p class="description">
+		Створити клас Нагадувач. Кожні вказані кількості секунд 
+		(використати setInterval) програма нагадує про якусь подію (це просто текст)
+		і також виводиться порядковий номер скільки раз вже нагадування було. Зробити 
+		так, щоб неможна було зробити одночасно декілька об’єктів-нагадувачів. 
+		Методи зупинки таймера, метод зміни повідомлення без зупинки таймера.
+	</p>
+	<script>
+		class Reminder {
+			static reminderRef
+			//так как объектов не может быть создано больше одного изза Singleton, 
+			//то я сомневаюсь что есть какой то смысл в статических полях, хотелось бы услышать от вас так ли это
+			constructor(seconds, message) {
+				if(Reminder.reminderRef) {
+					return 	Reminder.reminderRef
+				}
+				this.secondsAmount = seconds
+				this.message = message
+				this.counter = 0
+				this.intervalId
+				Reminder.reminderRef = this
+			}
+			start() {
+				this.intervalId = setInterval(() => {
+					this.counter++
+					alert(`${this.message}, номер сообщения: ${this.counter}`)
+				}, this.secondsAmount * 1000)
+			}
+			stopMethod() {
+				clearInterval(this.intervalId)
+			}
+		}
+
+		let obj = new Reminder(3, 'Hello')
+		obj.start()
+		setTimeout(() => obj.message = 'hi', 7000)
+		obj.stopMethod()
+	</script>
+</body>
+</html>
