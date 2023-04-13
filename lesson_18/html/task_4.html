@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 18(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		Наперед задано у скрипті масив зі списком бажань. 
+		Після завантаження сторінки випадковим чином вибираються 
+		3 і відображаються у окремих div (їх треба створити і додати на сторінку)
+	</p>
+	<div class="cnt"></div>
+	<script>
+		const container = document.querySelector('.cnt')
+		const wishlist = ['выучить английский', 'электрогитара', 'поездка в Японию', 'прыжок с парашютом', 'постичь дзен в javascript'];
+
+		function getRandomNum(min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+		
+		window.addEventListener('load', () => {
+			for (let i = 0; i < 3; i++) {
+				let d = document.createElement('div')
+				d.innerText = wishlist[getRandomNum(1, wishlist.length - 1)]
+				container.append(d)
+			}
+		})
+	</script>
+</body>
+</html>

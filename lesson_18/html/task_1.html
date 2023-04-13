@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 18(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Розробити калькулятор
+	</p>
+	<label class="label">
+		First Number
+		<input type="number" placeholder="First Number" class="input input-1">
+	</label>
+	<label class="label">
+		Second Number
+		<input type="number" placeholder="Second Number" class="input input-2">
+	</label>
+	<div class="actions">
+		<button id="addition" type="button" class="actions__button">Прибавить</button>
+		<button id="subtraction" type="button" class="actions__button">Отнять</button>
+		<button id="multiplication" type="button" class="actions__button">Умножить</button>
+		<button id="divide" type="button" class="actions__button">Поделить</button>
+	</div>
+	<label class="label">
+		Result
+		<input type="number" placeholder="result" class="input input-res">
+	</label>
+	<script>
+		const inp1 = document.querySelector('.input-1')
+		const inp2 = document.querySelector('.input-2')
+		const buttonAddition = document.querySelector('#addition')
+		const buttonSubtraction = document.querySelector('#subtraction')
+		const buttonMultiplication = document.querySelector('#multiplication')
+		const buttonDivide = document.querySelector('#divide')
+		const inpResult = document.querySelector('.input-res')
+		let firstNum, secondNum
+		inp1.addEventListener('input', () => {
+			firstNum = parseFloat(inp1.value)
+		})
+		inp2.addEventListener('input', () => {
+			secondNum = parseFloat(inp2.value)
+		})
+		buttonAddition.addEventListener('click', () => {
+			inpResult.value = firstNum + secondNum
+		})
+		buttonSubtraction.addEventListener('click', () => {
+			inpResult.value = firstNum - secondNum
+		})
+		buttonMultiplication.addEventListener('click', () => {
+			inpResult.value = firstNum * secondNum
+		})
+		buttonDivide.addEventListener('click', () => {
+			inpResult.value = firstNum / secondNum
+		})
+	</script>
+</body>
+</html>

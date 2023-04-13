@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 18(task 7)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 7</h1>
+	<p class="description">
+		Подорож складається з 3 етапів. На кожному етапі 
+		користувач може вибрати один з видів транспорту 
+		(авто, автобус, літак - випадаючий список), 
+		харчування (сніданок, обід, вечеря – checkbоx) 
+		та одного з 3-х гідів(використати  - radio buttons). 
+		Ціни визначте самі. Підрахувати загальну вартість.
+	</p>
+	<h2 class="title">Выберите транспорт:</h2>
+	<select id="select">
+		<option value="500">car</option>
+		<option value="300">bus</option>
+		<option value="800">airplane</option>
+	</select>
+	<br>
+	<h2 class="title">Выберите питание</h2>
+	<div class="actions">
+		<label class="label">
+			завтрак
+			<input type="checkbox" id="breakfast" class="input" value="200">
+		</label>
+		<label class="label">
+			обед
+			<input type="checkbox" id="dinner" class="input" value="500">
+		</label>
+		<label class="label">
+			ужин
+			<input type="checkbox" id="evening-meal" class="input" value="300">
+		</label>
+	</div>
+	<h2 class="title">Выберите гида</h2>
+	<div class="actions">
+		<label class="label">
+			первый
+			<input name="guide" type="radio" id="first-guide" class="input" value="200">
+		</label>
+		<label class="label">
+			второй
+			<input checked name="guide" type="radio" id="second-guide" class="input" value="500">
+		</label>
+		<label class="label">
+			третий
+			<input name="guide" type="radio" id="third-guide" class="input" value="300">
+		</label>
+	</div>
+	<button type="button" class="actions__button">Total sum</button>
+	<br>
+	<p class="result"></p>
+	<script>
+		const transportPrice = parseInt(document.querySelector('#select').value)
+		const foodInp = document.querySelectorAll('input[type="checkbox"]')
+		const guideInp = document.querySelector('input[type="radio"]:checked')
+		const btn = document.querySelector('button')
+		let totalPrice = transportPrice + parseInt(guideInp.value)
+
+		for (const inp of foodInp) {
+			inp.addEventListener('input', () => {
+				if(inp.checked) {
+					totalPrice += parseInt(inp.value)
+				}
+			})
+		}
+
+		btn.addEventListener('click', () => {
+			const p = document.querySelector('.result')
+			p.classList.add('description')
+			p.innerText = `Общая цена за все услуги: ${totalPrice} грн`
+		})
+	</script>
+</body>
+</html>

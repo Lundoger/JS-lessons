@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 18(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Зробити конвертер валют (курси валют – константи у скрипті)
+	</p>
+	<label class="label" style="margin-bottom: 20px;">
+		Сумма в гривнах
+		<input type="number" placeholder="grn" id="valueInGrn" class="input">
+	</label>
+	<button type="button" class="actions__button">Конвертировать</button>
+	<br>
+	<label class="label" style="margin-bottom: 20px;">
+		Сумма в евро
+		<input type="number" placeholder="euro" id="valueInEuro" class="input">
+	</label>
+	<br>
+	<label class="label" style="margin-bottom: 20px;">
+		Сумма в долларах
+		<input type="number" placeholder="dollar" id="valueInDollar" class="input">
+	</label>
+	<script>
+		const inpInGrn = document.querySelector('#valueInGrn')
+		const inpInEuro = document.querySelector('#valueInEuro')
+		const inpInDollar = document.querySelector('#valueInDollar')
+		const btn = document.querySelector('button')
+		const dollarRate = 37
+		const euroRate = 41
+		let grnValue
+		inpInGrn.addEventListener('input', () => {
+			grnValue = parseFloat(inpInGrn.value)
+		})
+		btn.addEventListener('click', () => {
+			inpInEuro.value = (grnValue/euroRate).toFixed(2)
+			inpInDollar.value = (grnValue/dollarRate).toFixed(2)
+		})
+	</script>
+</body>
+</html>
