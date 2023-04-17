@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 19(task 3)</title>
+</head>
+<body>
+	<div class="snow-container">
+		<a href="../index.html" class="back">Список задач</a>
+		<div id="snow" class="snow">
+			<div class="snowflake"></div>
+		</div>
+	</div>
+	<script>
+		// Відобразити падаючий сніг. Сніжинка з’являється у 
+		// верхній частині екрану і з випадковою швидкістю 
+		// рухається вниз. Як тільки сніжинка досягає нижньої 
+		// частини екрану вона знову повинна з’явитись у верхній 
+		// частині екрану.
+		class Snow {
+			constructor(snowflakeCount, minSpeed, maxSpeed) {
+				this.snowflakeCount = snowflakeCount
+				this.minSpeed = minSpeed
+				this.maxSpeed = maxSpeed
+			}
+			getRandomSpeed() {
+				return Math.random() * (this.maxSpeed - this.minSpeed + 1) + this.minSpeed
+			}
+			getRandomValue(min, max) {
+				return Math.floor(Math.random() * (max - min + 1)) + min
+			}
+			render(containerId) {
+				const cnt = document.getElementById(containerId)
+				let snowflake = ''
+				for (let i = 0; i < this.snowflakeCount; i++) {
+					const div = document.createElement('div')
+					div.classList.add('snowflake')
+					div.style.cssText = `left: ${this.getRandomValue(1, 100)}%;opacity: ${Math.random()};animation-delay: 0.${this.getRandomValue(1, 8)}s;animation-duration: ${this.getRandomSpeed()}s;`
+					cnt.append(div)
+				}
+			}
+		}
+		let obj = new Snow(300, 1, 4)
+		obj.render('snow')
+	</script>
+</body>
+</html>

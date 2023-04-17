@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 19(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Дано список спортсменів. Потрібно сформувати список 
+		тих, які будуть брати участь у змаганні. При цьому є 
+		два стовпці. В одному відображені всі спортсмени, в 
+		іншому – список тих, хто був вибраний. При натисканні 
+		на зелену стрілку спортсмен переміщається у список для 
+		змагань. При натисканні на червону стрілку спортсмен 
+		переміщається у загальний список.
+	</p>
+	<div id="athletes-cnt" class="athletes">
+	</div>
+	<script>
+		class AthletesList {
+			constructor(allAthletes, selectedAthletes) {
+				this.allAthletes = [...allAthletes]
+				this.selectedAthletes = [...selectedAthletes]
+			}
+			createEl(element, className=null, text=null) {
+				const el = document.createElement(element)
+				if(className) {
+					el.classList.add(className)
+				}
+				if(text) {
+					el.innerText = text
+				}
+				return el
+			}
+			render(containerId) {
+				const cnt = document.getElementById(containerId)
+				const list = this.createEl('ul', 'athletes__list')
+				list.id = 'list-all-athletes'
+				const listSelectedAthletes = this.createEl('ul', 'athletes__list')
+				listSelectedAthletes.id = 'list-selected-athletes'
+
+				for (let i = 0; i < this.allAthletes.length; i++) {
+					const li = this.createEl('li', 'athletes__item')
+					const span = this.createEl('span', '',this.allAthletes[i])
+					const btn = this.createEl('button', 'athletes__btn', '->')
+					li.append(span)
+					li.append(btn)
+					list.append(li)
+				}
+				for (let i = 0; i < this.selectedAthletes.length; i++) {
+					const li = this.createEl('li', 'athletes__item')
+					const span = this.createEl('span', '',this.selectedAthletes[i])
+					const btn = this.createEl('button', 'athletes__btn', '<-')
+					li.append(span)
+					li.append(btn)
+					listSelectedAthletes.append(li)
+				}
+				cnt.append(list)
+				cnt.append(listSelectedAthletes)
+			}
+			selectAthletes() {
+				this.listAllAthletes = document.querySelector('#list-all-athletes')
+				this.listSelectedAthletes = document.querySelector('#list-selected-athletes')
+
+				this.listAllAthletes.addEventListener('click', (event) => {
+					if (event.target.tagName === 'BUTTON') {
+						const item = event.target.parentElement
+						const copyItem = item.cloneNode(true)
+						copyItem.querySelector('button').innerText = '<-'
+						this.listSelectedAthletes.append(copyItem)
+						item.remove()
+					}
+  				})
+				this.listSelectedAthletes.addEventListener('click', (event) => {
+					if (event.target.tagName === 'BUTTON') {
+						const item = event.target.parentElement
+						const copyItem = item.cloneNode(true)
+						copyItem.querySelector('button').innerText = '->'
+						this.listAllAthletes.append(copyItem)
+						item.remove()
+					}
+  				})
+			}
+		}
+
+		const athletesList = ['Athletes 1', 'Athletes 2', 'Athletes 3', 'Athletes 4']
+		const selectedAthletesList = ['Athletes 5', 'Athletes 6']
+		let obj = new AthletesList(athletesList, selectedAthletesList)
+		obj.render('athletes-cnt')
+		obj.selectAthletes()
+	</script>
+</body>
+</html>

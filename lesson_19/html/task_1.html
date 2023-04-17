@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 19(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку
+	</p>
+	<div class="container">
+	</div>
+	<script>
+		class Card {
+			constructor() {
+				this.cards = []
+			}
+			createEl(element, classTitle=null, text=null) {
+				const el = document.createElement(element)
+				if(classTitle) {
+					el.className = classTitle
+				}
+				if(text) {
+					el.innerText = text
+				}
+				return el
+			}
+			render({cardImageSrc, cardText, cardPrice, cardLabel=null}) {
+				const card = this.createEl('div', 'item-container')
+				const labelsDiv = this.createEl('div', 'item-container__labels')
+				card.append(labelsDiv)
+
+				if(cardLabel) {
+					let label
+					if(cardLabel === 'top-sale') {
+						label = this.createEl('span', 'item-container__label item-container__label--top-sale', 'топ продаж')
+					}else if(cardLabel === 'discount') {
+						label = this.createEl('span', 'item-container__label item-container__label--discount', 'скидка')
+					}
+					labelsDiv.append(label)
+				}
+
+				const imageDiv = this.createEl('div', 'item-container__image')
+				card.append(imageDiv)
+
+				const image = this.createEl('img')
+				image.src = cardImageSrc
+				imageDiv.append(image)
+
+				const p = this.createEl('p', 'item-container__text', cardText)
+				card.append(p)
+
+				const price = this.createEl('div', 'item-container__price', cardPrice)
+				card.append(price)
+
+				this.cards.push(card)
+				return card
+			}
+			addActiveClass() {
+				for (const card of this.cards) {
+					card.addEventListener('click', () => {
+						this.clearActiveClass()
+						card.classList.add('active')
+					})
+				}
+			}
+			clearActiveClass() {
+				this.cards.forEach((card) => {
+					card.classList.remove('active')
+				})
+			}
+		}
+
+		const cnt = document.querySelector('.container')
+		const cardsList = [
+			{
+				cardImageSrc: '../img/monitor.webp', 
+				cardText: 'Монітор 49" Samsung Odyssey Neo G9', 
+				cardPrice: '49 999₴', 
+				cardLabel: 'top-sale',
+			},
+			{
+				cardImageSrc: '../img/guitar.webp', 
+				cardText: 'Гітара Harley Benton SC-500 BK Vintage Series', 
+				cardPrice: '10 390₴', 
+				cardLabel: 'discount',
+			},
+			{
+				cardImageSrc: '../img/keyboard.webp', 
+				cardText: 'Клавіатура дротова Hator Skyfall TKL PRO ENG/UKR/RUS Yellow', 
+				cardPrice: '3 999₴', 
+			},
+			{
+				cardImageSrc: '../img/headphones.webp', 
+				cardText: 'Навушники Logitech G PRO X Gaming Headset Black', 
+				cardPrice: '5 999₴', 
+				cardLabel: 'top-sale',
+			},
+		]
+		
+		let card = new Card()
+		for (const item of cardsList) {
+			cnt.append(card.render(item))
+		}
+		card.addActiveClass()
+	</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 19(task 4)</title>
+</head>
+<body>
+	<div class="stars-container">
+		<a href="../index.html" class="back">Список задач</a>
+		<div id="stars" class="stars">
+		</div>
+	</div>
+	<script>
+		// Сяючі зорі. Вказана кількість зірочок повинна 
+		// з’являтися у випадковій частині екрану. Кожна 
+		// зірка з певним кроком і інтервалом збільшується 
+		// від мінімального до максимального розміру. Як 
+		// тільки досягнути максимального розміру зірочка 
+		// повинна з’являтися у іншій випадковій позиції.
+		class StarrySky {
+			constructor(starsCount, minSize, maxSize) {
+				this.starsCount = starsCount
+				this.minSize = minSize
+				this.maxSize = maxSize
+			}
+			getRandomValue(min, max) {
+				this.time = Math.floor(Math.random() * (max - min + 1)) + min
+				return this.time
+			}
+			createStar() {
+				const star = document.createElement('div')
+				star.classList.add('star')
+				this.cnt.append(star)
+				this.starAnimation(star)
+			}
+			starAnimation(star) {
+					star.style.top = `${this.getRandomValue(1, 100)}%`
+					star.style.left = `${this.getRandomValue(1, 100)}%`
+					star.animate(
+						[
+							{
+								width: `${this.minSize}px`,
+								height: `${this.minSize}px`,
+								boxShadow: `0 0 ${this.minSize}px #cfbc53`,
+							},
+							{
+								width: `${this.maxSize}px`,
+								height: `${this.maxSize}px`,
+								boxShadow: `0 0 ${this.maxSize}px #cfbc53`,
+							},
+						],
+						{
+							duration: this.getRandomValue(1, 4)*1000,
+							easing: "linear",
+						}
+					)
+					setTimeout(()=> {
+						star.remove()
+						this.createStar()
+					}, this.time * 1000)
+			}
+			render(containerId) {
+				this.cnt = document.getElementById(containerId)
+				for (let i = 0; i < this.starsCount; i++) {
+					this.createStar()
+				}
+			}
+		}
+		let obj = new StarrySky(50, 4, 10)
+		obj.render('stars')
+	</script>
+</body>
+</html>
