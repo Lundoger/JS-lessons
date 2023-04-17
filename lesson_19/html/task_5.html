@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 19(task 5)</title>
+</head>
+<body>
+	<div class="games-container">
+		<a href="../index.html" class="back">Список задач</a>
+		<div id="game" class="game">
+		</div>
+	</div>
+	<script>
+		// Байрактар. З верхньої частини екрану у випадковій позиції
+		// по горизонталі з’являються танки, які їдуть вниз. При 
+		// кліку на танк він вибухає і зникає з екрану. 
+		class Game {
+			constructor(itemCount, containerId) {
+				this.cnt = document.getElementById(containerId)
+				this.itemCount = itemCount
+				this.count = 0
+			}
+			getRandomValue(min, max) {
+				return Math.floor(Math.random() * (max - min + 1)) + min
+			}
+			createItem() {
+				const item = document.createElement('div')
+				const image = document.createElement('img')
+				image.src = '../img/tank.png'
+				item.append(image)
+				item.classList.add('game-item')
+				item.style.top = `${this.getRandomValue(15, 90)}%`
+				this.cnt.append(item)
+				item.addEventListener('click', () => {
+					item.classList.add('killed')
+					item.style.animationPlayState = 'paused'
+					this.count += 1
+					this.counter.innerText = `танков уничтожено:${this.count}`
+					setTimeout(() => {
+						item.remove()
+						this.createItem()
+					}, 2000)
+				})
+			}
+			render() {
+				this.counter = document.createElement('div')
+				this.counter.innerText = `танков уничтожено:${this.count}`
+				this.cnt.append(this.counter)
+				for (let i = 0; i < this.itemCount; i++) {
+					const timer = setTimeout(() => {
+						this.createItem()
+					}, i*1000)
+				}
+			}
+		}
+		let obj = new Game(5, 'game')
+		obj.render()
+	</script>
+</body>
+</html>
