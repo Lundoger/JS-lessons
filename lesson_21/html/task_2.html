@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 21(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Дано 5 елементів input. При введенні значення у 
+		якийсь із них необхідно автоматично заповнювати інші 
+		усі попередні у спадному порядку (кожен попередній має 
+		начення на 1 менше за наступний), усі наступні на 1 більше 
+		(кожен наступне на 1 більше за попереднього)
+	</p>
+	<div class="container-2">
+		<label class="label">
+			Value 1
+			<input type="text" class="input">
+		</label>
+		<label class="label">
+			Value 2
+			<input type="text" class="input">
+		</label>
+		<label class="label">
+			Value 3
+			<input type="text" class="input">
+		</label>
+		<label class="label">
+			Value 4
+			<input type="text" class="input">
+		</label>
+		<label class="label">
+			Value 5
+			<input type="text" class="input">
+		</label>
+	</div>
+	<script>
+		document.querySelector('.container-2').addEventListener('change', (e) => {
+			let inp = e.target
+			let label = inp.parentElement
+			let copyLabel = label
+			if(inp.classList.contains('input')) {
+				let inputValue = parseFloat(inp.value)
+				let copyInputValue = inputValue
+				while(label.nextElementSibling) {
+					label = label.nextElementSibling
+					label.firstElementChild.value = inputValue +=1
+				}
+				inputValue = copyInputValue
+				label = copyLabel
+				while(label.previousElementSibling) {
+					label = label.previousElementSibling
+					label.firstElementChild.value = inputValue-=1
+				}
+			}
+		})
+	</script>
+</body>
+</html>

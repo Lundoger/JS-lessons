@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 21(task 5)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 5</h1>
+	<p class="description">
+		На формі вводять 7 числових значень 
+		(вік, зріст, вага, заробітна плата, стаж, 
+		номер відділу, порядковий номер). Додати 
+		подію обробки події click на форму і якщо 
+		клік на input, то автоматично замінювати 
+		значення його на 0.
+	</p>
+	<form action="#" class="form">
+		<label class="label">
+			Возраст
+			<input type="number" placeholder="your age" class="input" value="18">
+		</label>
+		<label class="label">
+			Рост
+			<input type="number" placeholder="your height" class="input" value="190">
+		</label>
+		<label class="label">
+			Вес
+			<input type="number" placeholder="your weight" class="input" value="85">
+		</label>
+		<label class="label">
+			Зарплата
+			<input type="number" placeholder="Salary" class="input" value="10000">
+		</label>
+		<label class="label">
+			Стаж работы 
+			<input type="number" placeholder="Work experience" class="input" value="2">
+		</label>
+		<label class="label">
+			Номер отдела
+			<input type="number" placeholder="Department number" class="input" value="15">
+		</label>
+		<label class="label">
+			Серийный номер
+			<input type="number" placeholder="Serial number" class="input" value="523">
+		</label>
+	</form>
+	<script>
+		const form = document.querySelector('.form')
+		form.addEventListener('click', (e) => {
+			if(e.target.classList.contains('input')) {
+			      	e.target.value = 0
+			}
+		})
+	</script>
+</body>
+</html>

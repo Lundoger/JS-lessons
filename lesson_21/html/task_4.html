@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 21(task 4)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 4</h1>
+	<p class="description">
+		Дано 3 таблиці розмірності 3*3 з випадковими числами. 
+		Якщо відбувається клік на якійсь із клітинок, то до 
+		відповідної таблиці додається червона рамка (спробуйте 
+		додати можливість відображення кількості кліків біля 
+		назви таблиці з використанням відповідно доданого для 
+		цього атрибута).
+	</p>
+	<div class="container-4">
+	</div>
+	<script>
+		class TableGeneration {
+			constructor(rowI, colI, tableCount) {
+				this.rowI = rowI
+				this.colI = colI
+				this.tableCount = tableCount
+			}
+			getRandomNum(min, max) {
+				return Math.floor(Math.random() * (max - min + 1)) + min
+			}
+			getCounter() {
+				const counter = document.createElement('div')
+				counter.innerText = `к-тво кликов: `
+				const counterSpan = document.createElement('span')
+				counterSpan.innerText = 0
+				counter.append(counterSpan)
+				return counter
+			}
+			getTable() {
+				const table = document.createElement('table')
+				table.addEventListener('click', (e) => {
+					let td = e.target
+					if(td.tagName === 'TD') {
+						td.closest('table').style.background = 'red'
+						table.previousElementSibling.firstElementChild.innerText++
+					}
+				})
+				for (let i = 0; i < this.rowI; i++) {
+					const tr = document.createElement('tr')
+					for (let j = 0; j < this.colI; j++) {
+						const td = document.createElement('td')
+						td.innerText = this.getRandomNum(1, 100)
+						tr.append(td)
+					}	
+					table.append(tr)
+				}
+				return table
+			}
+			render(targetSelector) {
+				const cnt = document.querySelector(targetSelector)
+				for (let i = 1; i <= this.tableCount; i++) {
+					cnt.append(this.getCounter())
+					cnt.append(this.getTable())
+				}
+			}
+		}
+
+		let obj = new TableGeneration(3,3,3)
+		obj.render('.container-4')
+	</script>
+</body>
+</html>

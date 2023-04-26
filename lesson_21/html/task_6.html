@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 21(task 6)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 6</h1>
+	<p class="description">
+		Дано перелік товарів у кошику. При зміні 
+		кількості одиниць товару збільшувати загальну 
+		вартість. Створити клас Product, що призначений 
+		для маніпуляцій товаром та клас ProductManager
+		що оперує з усіма товарами через подію передвати 
+		ідентифікатор товару та операцію, що зроблена
+	</p>
+	<div class="container-5">
+	</div>
+	<script>
+		class ElementCreator {
+			static createElement({tag, attrs, props, events}) {
+				const el = document.createElement(tag)
+				if(attrs) {
+					for (const attrKey in attrs) {
+						el.setAttribute(attrKey, attrs[attrKey])
+					}
+				}
+				if(props) {
+					for (const propsKey in props) {
+						el[propsKey] = props[propsKey]
+					}
+				}
+				if(events) {
+					for (const eventType in events) {
+						el.addEventListener(eventType, events[eventType])
+					}
+				}
+				return el
+			}
+		}
+		class Product {
+			constructor({imageSrc, title, price}) {
+				this.imageSrc = imageSrc
+				this.title = title
+				this.price = price
+				this.totalPrice = price
+				this.itemCount = 1
+				this.el = this.createItem()
+				this.id = new Date().getTime()
+			}
+			onDeleteItem() {
+				const deleteItem = new CustomEvent('delete', {
+					detail: {
+						id: this.id,
+						price: this.price,
+						count: this.quantityNumber,
+					}
+				})
+				this.el.dispatchEvent(deleteItem)
+			}
+			onDecreaseItem() {
+				const minusItem = new CustomEvent('decrease', {
+					detail: {
+						id: this.id,
+						price: this.price,
+						count: this.quantityNumber,
+						priceContainer: this.productPriceContainer,
+						targetBtn: this.btnMinus
+					},
+				})
+				this.el.dispatchEvent(minusItem)
+			}
+			onIncreaseItem() {
+				const plusItem = new CustomEvent('increase', {
+					detail: {
+						id: this.id,
+						price: this.price,
+						count: this.quantityNumber,
+						priceContainer: this.productPriceContainer,
+						targetBtn: this.btnPlus
+					},
+				})
+				this.el.dispatchEvent(plusItem)
+			}
+			createItem() {
+				const item = ElementCreator.createElement({tag: 'div',attrs: {class: 'item'}})
+				const itemInfo = ElementCreator.createElement({tag: 'div',attrs: {class: 'item__info'}})
+				const itemImage = ElementCreator.createElement({tag: 'div',attrs: {class: 'item__image'}})
+				const image = ElementCreator.createElement({tag: 'img', attrs: {src: this.imageSrc}})
+				const itemText = ElementCreator.createElement({tag: 'p', attrs: {class: 'item__title'}, props: {innerText: this.title}})
+				itemImage.append(image)
+				itemInfo.append(itemImage)
+				itemInfo.append(itemText)
+				item.append(itemInfo)
+				const quantity = ElementCreator.createElement({tag: 'div', attrs: {class: 'quantity'}})
+				this.btnMinus = ElementCreator.createElement({tag: 'button', attrs: {class: 'quantity__button quantity__button-minus'}, props: {innerText: '-'}, events: {click: this.onDecreaseItem.bind(this)}})
+				this.btnPlus = ElementCreator.createElement({tag: 'button', attrs: {class: 'quantity__button quantity__button-plus'}, props: {innerText: '+'}, events: {click: this.onIncreaseItem.bind(this)}})
+				this.quantityNumber = ElementCreator.createElement({tag: 'span', attrs: {class: 'quantity__number'}, props: {innerText: this.itemCount}})
+				quantity.append(this.btnMinus)
+				quantity.append(this.quantityNumber)
+				quantity.append(this.btnPlus)
+				item.append(quantity)
+				this.productPriceContainer = ElementCreator.createElement({tag: 'span', props: {innerText: `${this.price} ₴`}})
+				const productPriceParent = ElementCreator.createElement({tag: 'div', attrs: {class: 'item__price'}, props: {innerText: 'К оплате: '}})
+				productPriceParent.append(this.productPriceContainer)
+				item.append(productPriceParent)
+				this.btnDelete = ElementCreator.createElement({tag: 'button', attrs: {class: 'item__delete'}, events: {click: this.onDeleteItem.bind(this)}})
+				item.append(this.btnDelete)
+				return item
+			}
+		}
+		class ProductManager {
+			constructor(productList) {
+				this.productList = productList
+				this.itemList = []
+				this.totalCost = 0
+			}
+			updatePrices() {
+				this.totalCostContainer.innerText = `${this.totalCost} ₴`
+			}
+			onDelete(e) {
+				e.target.remove()
+				this.totalCost -= e.detail.price * parseInt(e.detail.count.innerText)
+				this.updatePrices()
+			}
+			onDecrease(e) {
+				let count = parseInt(e.detail.count.innerText)
+				if(count <= 1) {
+					e.detail.targetBtn.setAttribute('disable', 'true')
+				}else {
+					e.detail.targetBtn.removeAttribute('disable')
+					count--
+					e.detail.count.innerText = count
+					let price = e.detail.price
+					e.detail.priceContainer.innerText = `${price * count} ₴`
+					this.totalCost -= price
+					this.updatePrices()
+				}
+			}
+			onIncrease(e) {
+				let count = parseInt(e.detail.count.innerText)
+				if(count >= 10) {
+					e.detail.targetBtn.setAttribute('disable', 'true')
+				}else {
+					e.detail.targetBtn.removeAttribute('disable')
+					count++
+					e.detail.count.innerText = count
+					let price = e.detail.price
+					e.detail.priceContainer.innerText = `${price * count} ₴`
+					this.totalCost += price
+					this.updatePrices()
+				}
+			}
+			render(targetSelector) {
+				const cnt = document.querySelector(targetSelector)
+				for (const product of this.productList) {
+					let item = new Product(product)
+					item.el.addEventListener('decrease', this.onDecrease.bind(this))
+					item.el.addEventListener('increase', this.onIncrease.bind(this))
+					item.el.addEventListener('delete', this.onDelete.bind(this))
+					this.totalCost += product.price
+					cnt.append(item.el)
+				}
+				this.totalCostContainer = ElementCreator.createElement({tag: 'span', props: {innerText: `${this.totalCost} ₴`}})
+				const totalCostParent = ElementCreator.createElement({tag: 'div', attrs: {class: 'total-sum'}, props: {innerText: `Общая сумма: `}})
+				totalCostParent.append(this.totalCostContainer)
+				cnt.append(totalCostParent)
+			}
+		}
+		
+		const productList = [
+			{
+				imageSrc: '../img/guitar.webp', 
+				title: 'Harley Benton SC-500 BK Vintage Series', 
+				price: 10390,
+			},
+			{
+				imageSrc: '../img/keyboard.webp', 
+				title: 'keyboard Logitech', 
+				price: 4999,
+			},
+			{
+				imageSrc: '../img/headphones.webp', 
+				title: 'headphones Logitech G Pro X', 
+				price: 5999,
+			},
+		]
+		let obj = new ProductManager(productList)
+		obj.render('.container-5')
+	</script>
+</body>
+</html>
