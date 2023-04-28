@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 22(task 3)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 3</h1>
+	<p class="description">
+		Користувач задає місяць навчання учня 
+		(перевіряти чи є числом, чи від 1 до 12, чи не канікули) 
+		та оцінку (перевіряти чи є числом, чи від 1 до 100). 
+		Вивести чи зможе він виправити оцінку (якщо оцінка погана 
+		і це не останній місяць у семестрі) . Обробку усіх помилок 
+		зробити з використанням відповідних класів.
+	</p>
+	<script>
+		class IsNotANumber extends Error {
+    		constructor() {
+    	  		super('Not a number')
+    	  		this.name = 'IsNotANumber'
+    		}
+		}
+		class NotInInterval extends Error {
+		    constructor() {
+		        super('Not in interval')
+		        this.name = 'Not in interval'
+		    }
+		}
+		class IsHolidays extends Error {
+		    constructor() {
+		        super('Is holidays')
+		        this.name = 'IsHolidays'
+		    }
+		}
+		class PossibleToCorrectScore {
+		    constructor(month, score) {
+				this.month = month         
+				this.score = score         
+		    }
+		    validateCurrentMonth() {
+		        try {
+		            if (isNaN(this.month)) throw new IsNotANumber()
+		            if (this.month < 1 || this.month > 12) throw new NotInInterval()
+		            if (this.month >= 6 && this.month <= 8) throw new IsHolidays()
+		        } catch (err) {
+		            if (err instanceof IsNotANumber){
+		                alert(err.message)
+		            } else if (err instanceof NotInInterval){
+		                alert(err.message)
+		            } else if (err instanceof IsHolidays){
+		                alert(err.message)
+		            } else return false
+		        }
+		        return true
+		    }
+		    validateCurrentScore() {
+		        try {
+		            if (isNaN(this.score)) throw new IsNotANumber()
+		            if (this.score < 1 || this.score > 100) throw new IsInInterval()
+		        } catch (err) {
+		            if (err instanceof IsNotANumber){
+		                alert(err.message)
+		            } else if (err instanceof NotInInterval){
+		                alert(err.message)
+		            } else return false
+		        }
+		        return true
+		    }
+		    getResult(){
+		        if (this.month !== 5 && this.score >= 70)alert('You have a chance')
+		        else alert('No any chance')
+		    }
+		}
+
+		let obj = new PossibleToCorrectScore(0, 0)
+		obj.validateCurrentMonth()
+		obj.validateCurrentScore()
+		obj.getResult()
+	</script>
+</body>
+</html>

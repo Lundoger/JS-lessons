@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 22(task 1)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 1</h1>
+	<p class="description">
+		<img src="../img/Screenshot_1.png" alt="">
+	</p>
+	<script>
+		class Client {
+			constructor(id, fullName, moneyCount) {
+				this.id = id
+				this.fullName = fullName
+				this.moneyCount = moneyCount
+			}
+			addMoney(value) {
+				this.moneyCount += value
+			}
+			removeMoney(value) {
+				if(value <= this.moneyCount) this.moneyCount -= value
+			}
+			toString() {
+				return `id - ${this.id}, full name - ${this.fullName}, money count - ${this.moneyCount}`
+			}
+		}
+		class GoldenClient extends Client {
+			constructor(id, fullName, moneyCount, limit, percent) {
+				super(id, fullName, moneyCount)
+				this.limit = limit
+				this.percent = percent
+			}
+			tax() {
+				this.moneyCount = this.moneyCount - (this.moneyCount*this.percent/100) 
+			}
+			toString() {
+				return `id - ${this.id}, full name - ${this.fullName}, money count - ${this.moneyCount}, limit - ${this.limit}, percent - ${this.percent}`
+			}
+		}
+		class Bank {
+			constructor(clientsList) {
+				this.clientsList = clientsList
+			}
+			getCasualClients(targetSelector, id) {
+				const cnt = document.querySelector(targetSelector)
+				for (const client of this.clientsList) {
+					if(client instanceof Client) {
+						const item = document.createElement('div')
+						item.innerText = `${client.fullName} - ${client.moneyCount}`
+						cnt.append(item)
+					}
+				}
+			}
+			getGoldenClients(targetSelector, id) {
+				const cnt = document.querySelector(targetSelector)
+				for (const client of this.clientsList) {
+					if(client instanceof GoldenClient) {
+						const item = document.createElement('div')
+						item.innerText = `${client.fullName} - ${client.moneyCount}`
+						cnt.append(item)
+					}
+				}
+			}
+			getTotalSum() {
+				let totalSum = this.clientsList.reduce((acc, el) => {
+					return acc+=el.moneyCount
+				}, 0)
+			}
+		}
+	</script>
+</body>
+</html>

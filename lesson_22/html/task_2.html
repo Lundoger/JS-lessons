@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 22(task 2)</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задача 2</h1>
+	<p class="description">
+		Розробити Класи<br>
+			House<br>
+				--- властивості ---<br>
+				Координата Х<br>
+				Координата У<br>
+				шлях до зображення<br>
+				інтервал оновлення<br>
+				--- методи ---<br>
+				генерування елемента розмітки<br>
+				оновлення через вказаний інтервал (збільшення або зменшення масштабу (об’єкт не рухається)<br>
+			Bird<br>
+				--- властивості ---<br>
+				Координата Х<br>
+				Координата У<br>
+				шлях до зображення<br>
+				інтервал оновлення<br>
+				--- методи ---<br>
+				генерування елемента розмітки<br>
+				оновлення через вказаний інтервал (випадкове зміщення по горизонталі (зміна координати Х))<br>
+			Dog<br>
+				--- властивості ---<br>
+				Координата Х<br>
+				Координата У<br>
+				шлях до зображення<br>
+				інтервал оновлення<br>
+				--- методи ---<br>
+				генерування елемента розмітки<br>
+				оновлення через вказаний інтервал (випадкове переміщення у довільному напрямку)<br>
+		Подумайте яким має бути спільний клас предок.
+	</p>
+	<script>
+		class Parent {
+			constructor(xPosition, yPosition, imageSrc, interval) {
+				this.xPosition = xPosition
+				this.yPosition = yPosition
+				this.imageSrc = imageSrc
+				this.interval = interval
+				this.el = this.createElement()
+			}
+			getRandomV(value) {
+				return Math.floor(Math.random() * (value - (-value) + 1)) + (-value);	
+			}
+			createElement() {
+				const item = document.createElement('div')
+				item.classList.add('image')
+				const image = document.createElement('img')
+				image.src = this.imageSrc
+				item.append(image)
+				return item
+			}
+
+		}
+		class House extends Parent {
+			constructor(xPosition, yPosition, imageSrc, interval) {
+				super(xPosition, yPosition, imageSrc, interval)
+			}
+			updateElement(value) {
+				setInterval(() => {
+					this.el.style.transform = `scale(${this.getRandomV(value)})`
+				}, this.interval * 1000);
+			}
+		}
+		class Bird extends Parent {
+			constructor(xPosition, yPosition, imageSrc, interval) {
+				super(xPosition, yPosition, imageSrc, interval)
+			}
+			updateElement(value) {
+				setInterval(() => {
+					this.el.style.transform = `translateX(${this.getRandomV(value)}px)`
+				}, this.interval * 1000);
+			}
+		}
+		class Dog extends Parent {
+			constructor(xPosition, yPosition, imageSrc, interval) {
+				super(xPosition, yPosition, imageSrc, interval)
+			}
+			updateElement(value) {
+				setInterval(() => {
+					this.el.style.transform = `translate(${this.getRandomV(value)}px, ${this.getRandomV(value)}px)`
+				}, this.interval * 1000);
+			}
+		}
+	</script>
+</body>
+</html>
