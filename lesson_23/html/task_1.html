@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css"/>
+	<title>Lesson 23</title>
+</head>
+<body>
+	<a href="../index.html" class="back">Список задач</a>
+	<h1 class="title">Задачи</h1>
+	<script>
+		// =======================================Date=================================================
+		// Задача  1. Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення.
+
+		const currentDate = new Date()
+		currentDate.setDate(56)
+
+		//-----------------------------------------------------------------------
+		// Задача 2 . Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент.
+
+		const manufactureDate = new Date('2022.07.10')//простите но мне очень лень генерировать самому инпуты и забирать с них value
+		const daysNumberExpirationDate = 445
+		let sum = manufactureDate.setDate(daysNumberExpirationDate)
+		if(sum > currentDate.getTime()) {
+			document.write('придатний')
+		}else {
+			document.write('не придатний')
+		}
+
+		//-----------------------------------------------------------------------
+		// Задача 3. Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і  вставкою.
+
+		function getRandomNum(min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
+		function arrayGeneration(itemsCount) {
+			let arr = []
+			for (let i = 0; i < itemsCount; i++) {
+				let randomNum = getRandomNum(1, 800)
+				arr.push(randomNum)
+			}
+			return arr
+		}		
+		let arr1 = arrayGeneration(10000)
+		let arr2 = arrayGeneration(10000)
+
+		const startTime1 = new Date().getTime()
+		for (let j = arr1.length - 1; j > 0; j--) {
+			for (let i = 0; i < j; i++) {
+		    	if (arr1[i] > arr1[i + 1]) {
+		    		let temp = arr1[i];
+		    		arr1[i] = arr1[i + 1];
+		    		arr1[i + 1] = temp;
+		      	}
+		    }
+		}
+		const endTime1 = new Date().getTime()
+		const diff1 = endTime1 - startTime1
+
+
+		const startTime2 = new Date().getTime()
+		for (let i = 1, l = arr2.length; i < l; i++) {
+        	const current = arr2[i];
+        	let j = i;
+        	while (j > 0 && arr2[j - 1] > current) {
+        	    arr2[j] = arr2[j - 1];
+        	    j--;
+        	}
+        	arr2[j] = current;
+    	}
+		const endTime2 = new Date().getTime()
+		const diff2 = endTime2 - startTime2
+		console.log(diff1);
+		console.log(diff2);
+
+		//-----------------------------------------------------------------------
+		// Задача 4. Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для розв’язання задачі.
+		const firstNum = getRandomNum(1,100)
+		const secondNum = getRandomNum(1,100)
+		const correctAnswer = firstNum + secondNum
+		const startTime = new Date().getTime()
+		let userAnswer
+		// while(correctAnswer !== userAnswer) {
+		// 	userAnswer = parseInt(prompt(`${firstNum} + ${secondNum}`))
+		// }
+		const endTime = new Date().getTime()
+		const spentTime = (endTime-startTime) / 1000
+		// alert(`${spentTime} секунд потрачено на решение примера`)
+
+		//========================================================================================================================================================
+		// =======================================String=================================================
+		//========================================================================================================================================================
+		// Задача 1. Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази).
+
+		let someArr = ['124sdlkg', 'sd908lkg', 'sfasf29', 'sdgsg', 'sdgsdg', 'kdgj392', 'asdg']
+		let resultArray = someArr.reduce((acc,str) => {
+			if(/\d/.test(str)) acc.push(str)
+			return acc
+		}, [])
+		console.log(resultArray);
+		
+		// Задача 2. Дано масив рядків. Вивести ті, у яких немає цифр.
+
+		let resultArray2 = someArr.reduce((acc,str) => {
+			if(!/\d/.test(str)) acc.push(str)
+			return acc
+		}, [])
+		console.log(resultArray2);
+
+		// Задача 3. Дано масив рядків. Вивести ті, у яких є голосні літери.
+
+		let resultArray3 = someArr.reduce((acc,str) => {
+			if(/[aeuioy]/.test(str)) acc.push(str)
+			return acc
+		}, [])
+		console.log(resultArray3);
+
+		// Задача 4. Дано масив рядків. Вивести ті, у яких немає голосних літер.
+
+
+		let resultArray4 = someArr.reduce((acc,str) => {
+			if(!/[aeuioy]/.test(str)) acc.push(str)
+			return acc
+		}, [])
+		console.log(resultArray4);
+
+
+		// Задача 5. Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3.
+
+		let resultArray5 = someArr.reduce((acc,str) => {
+			if(/[1 | 3]/.test(str)) acc.push(str)
+			return acc
+		}, [])
+		console.log(resultArray5);
+
+		// Задача 6. Дано рядок тексту, вивести усі числа, які є у тексті.
+
+		let someStr = 'kaiyfg,345sdoo.efcx1098!'
+		let result = someStr.match(/\d/g)
+		console.log(result);
+
+		// Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.
+
+		let result2 = someStr.match(/[^\w\s]/g)
+		// let result2 = someStr.match(/\p{P}/gu)
+		console.log(result2);
+
+		// Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
+
+		let result3 = someStr.match(/[\w\s]*[^\w\s]/g)
+		console.log(result3);
+
+		// Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+
+		let someStr2 = 'sdf dsfsdfdsf 14.09.2023 cxvxvvds 23.11.2017'
+		let result4 = someStr2.match(/\d{2}\W\d{2}\W\d{4}/g)
+		console.log(result4);
+
+		// Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.
+		let someStr3 = 'sdf21 32 4312 dsfsdfdsf1 45 cxvx456vvd23s11'
+		let result5 = someStr3.match(/\d{2}/g).length
+		console.log(result5);
+		// Задача 11. Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери.
+
+		let someStr4 = 'lwkjfsd 4142-3433-2323-3434 dsf4142-3433-2323-3434sdfsf dfsf.-2359/4142-3433-2323-3434sdf'
+		let result6 = someStr4.match(/\d{4}-\d{4}-\d{4}-\d{4}/g)
+		console.log(result6);      
+
+		// Задача 12. Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)
+
+		let someStr5 = 'https://www.kmu.gov.ua/'
+		if(/gov/.test(someStr5)) {
+			alert('так сайт урядовий')			
+		}else {
+			alert('Нi')
+		}
+
+		// Задача 13. Вибрати усі роки після 2021 року з отриманого повідомлення
+
+		let someStr6 = 'sdfdsjh2000 sdl,jf 2021 lkdwsjfdskjf 2023fdsjkf 2022sakdf'
+		let result7 = someStr6.match(/202[2-9]/g)
+		console.log(result7);
+
+		// Задача 14. Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)
+
+		let someStr7 = '+380991231223'
+		if(/^[+38]/.test(someStr7)) alert('так')
+		else alert('нi')
+
+		// Задача 15. Користувач вводить прізвище та ім’я в одному рядку через пробіл.  Замінити пробіл на дефіс.
+		let someStr8 = 'Ivan Ivanov'
+		someStr8.replace(/\s/, '-')
+		// Задача 16. Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «день/місяць/рік»
+
+		let someStr9 = '09.11.2020'
+		console.log(someStr9.replace(/[.]/g, '/'));
+		// Задача 17. Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи  є це день вихідним
+
+		const userDay = prompt('Введите номер дня (0-6) или день (sun,mon,tue,wed,thu,fri,sat)')
+		if(/[0 | 6 | sun | sat]/i.test(userDay)) {
+			alert('Выходной')
+		}else { 
+			alert('Будний день')
+		}
+	</script>
+</body>
+</html>
